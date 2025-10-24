@@ -1,0 +1,86 @@
+    body {
+      font-family: "Inter", "Segoe UI", sans-serif;
+      background-color: #dcfff3;
+      color: #2d3748;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      color: #000000 !important;
+    }
+
+    /* Hero */
+    .hero {
+      /* background: linear-gradient(135deg, #5dab9f, #61987e); */
+      background: linear-gradient(135deg, #5ca0b2, #61987e);
+      color: white;
+      padding: 6rem 0;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #e2eaf1;
+    }
+    .hero img {
+      max-width: 90%;
+    }
+
+    /* Role Selection */
+    .role-card {
+      background: white;
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+    .role-card img {
+      width: 80px;
+      margin-bottom: 1rem;
+    }
+    .role-card h5 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .role-card a {
+      border-radius: 30px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 500;
+    }
+
+    /* Why Us */
+    .why-us {
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      padding: 3rem;
+    }
+    .why-us h2 {
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .why-us i {
+      font-size: 1.6rem;
+      color: #198754;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #5dab9f, #61987e);
+      color: #cbd5e0;
+    }
+    footer a {
+      color: #cbd5e0;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: white;
+    }

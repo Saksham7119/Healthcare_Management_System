@@ -1,0 +1,226 @@
+nav {
+    background-color: rgb(45, 109, 131);
+    font-weight: 500;
+    /* color: white !important; */
+}
+
+.welcomeSectionDiv img {
+    width: 180px;
+    margin-right: 50px;
+}
+
+.welcomeSectionBtn {
+    background-color: rgb(45, 109, 131);
+    color: white;
+}
+
+.welcomeSectionBtn:hover {
+    background-color: rgb(37, 89, 107);
+    color: white;
+}
+
+.alert-info {
+    background-color: rgb(45, 109, 131);
+    color: white;
+}
+
+.btn-close {
+    color: red;
+}
+
+.notification-panel {
+    max-height: 300px;
+    /* Fixed height */
+    overflow-y: auto;
+    /* Vertical scroll only */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+    padding-right: 10px;
+    /* Room for scrollbar */
+}
+
+.notification {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    /* less bubble-like */
+}
+
+.addMedicineBtn {
+    background-color: rgb(45, 109, 131);
+    color: white;
+    width: 200px;
+}
+
+.addMedicineBtn:hover {
+    background-color: rgb(37, 89, 107);
+    color: white;
+}
+
+#addMedicineModal .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #addMedicineModal .modal-header {
+            background: linear-gradient(135deg, rgb(45, 109, 131) 0%, rgb(58, 141, 169) 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            border-bottom: none;
+        }
+
+        #addMedicineModal .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #addMedicineModal .modal-body {
+            padding: 1.5rem;
+        }
+
+        #addMedicineModal .modal-footer {
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem 1.5rem;
+        }
+
+        /* Form Floating Enhancements */
+        #addMedicineModal .form-floating .form-control,
+        #addMedicineModal .form-floating .form-select {
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            padding-left: 2.5rem;
+        }
+
+        #addMedicineModal .form-floating .form-control:focus,
+        #addMedicineModal .form-floating .form-select:focus {
+            border-color: rgb(45, 109, 131);
+            box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
+        }
+
+        #addMedicineModal .form-floating > label {
+            padding-left: 2.5rem;
+            color: #6c757d;
+        }
+
+        #addMedicineModal .form-floating .form-control:focus ~ label,
+        #addMedicineModal .form-floating .form-control:not(:placeholder-shown) ~ label,
+        #addMedicineModal .form-floating .form-select:focus ~ label {
+            color: rgb(45, 109, 131);
+        }
+
+        /* addMedicineDiv Styling */
+        .addMedicineDiv {
+            position: relative;
+        }
+
+        /* addDenominationDiv Styling */
+        .addDenominationDiv {
+            background: linear-gradient(135deg, rgba(45, 109, 131, 0.05) 0%, rgba(58, 141, 169, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid rgba(45, 109, 131, 0.2);
+        }
+
+        .addDenominationDiv .form-label {
+            color: rgb(45, 109, 131);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .addDenominationDiv .form-control {
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+        }
+
+        .addDenominationDiv .form-control:focus {
+            border-color: rgb(45, 109, 131);
+            box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
+        }
+
+        /* Button Styling */
+        #addMedicineModal .btn-primary,
+        #addMedicineSubmitBtn,
+        #generateInputForDenomination,
+        #addMedicineFormatSubmitBtn {
+            background: linear-gradient(135deg, rgb(45, 109, 131) 0%, rgb(58, 141, 169) 100%);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #addMedicineModal .btn-primary:hover,
+        #addMedicineSubmitBtn:hover,
+        #generateInputForDenomination:hover,
+        #addMedicineFormatSubmitBtn:hover {
+            background: linear-gradient(135deg, rgb(35, 89, 111) 0%, rgb(45, 109, 131) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(45, 109, 131, 0.3);
+        }
+
+        #addMedicineModal .btn-secondary {
+            background: #6c757d;
+            border: none;
+            padding: 0.625rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #addMedicineModal .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* denominationContainer Styling - Clean and Simple */
+        #denominationContainer {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        /* Style for dynamically created form-floating divs */
+ 
+
+        /* APPROACH 2: Minimal wrapper classes for icons only */
+        
+        .icon-wrapper {
+            position: relative;
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgb(45, 109, 131);
+            font-size: 1rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Section Title */
+        .section-title {
+            color: rgb(45, 109, 131);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgb(45, 109, 131);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }

@@ -1,0 +1,462 @@
+nav {
+  background-color: rgb(45, 109, 131);
+  font-weight: 500;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.store-container {
+  padding: 2rem 3rem;
+  flex: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.store-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.store-header h4 {
+  color: rgb(45, 109, 131);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.mainStoreDiv {
+  flex: 1;
+  padding: 0;
+}
+
+.searchMedicineDiv {
+  margin-bottom: 20px;
+}
+#searchStoreMedicineInput {
+  margin-left: 18px;
+  border-radius: 10px;
+  border: rgba(45, 110, 131) 2px solid;
+  height: 39px;
+  width: 400px;
+  padding: 10px;
+}
+
+.medicineCardParentDiv {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+  padding: 0.5rem 0;
+}
+
+.medicineCard {
+  width: 100% !important;
+  max-width: 320px;
+  margin: 0 auto;
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* .medicineCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(45, 109, 131, 0.15) !important;
+} */
+
+/* .medicineCard .card-img-top {
+  padding: 1.5rem !important;
+  height: 180px;
+  object-fit: contain;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 109, 131, 0.05) 0%,
+    rgba(58, 141, 169, 0.05) 100%
+  );
+} */
+
+.medicineCard .card-body {
+  padding: 1.25rem !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+}
+
+.medicineCard .card-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.medicineCard .card-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.medicineCard .card-body::-webkit-scrollbar-thumb {
+  background: rgb(45, 109, 131);
+  border-radius: 4px;
+}
+
+.medicineCard .card-title {
+  font-size: 1.1rem !important;
+  margin-bottom: 0.75rem !important;
+  color: rgb(45, 109, 131) !important;
+}
+
+.medicineCard .card-body p {
+  font-size: 0.85rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.4;
+}
+
+.medicineCard .card-footer {
+  padding: 1rem 1.25rem !important;
+  background: #f8f9fa !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.medicineCard .card-footer .btn {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.medicineCardEditBtn {
+  background-color: rgb(45, 109, 131) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.medicineCardEditBtn:hover {
+  background-color: rgb(35, 89, 111) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(45, 109, 131, 0.2);
+}
+
+.medicineCardRemoveBtn {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.medicineCardRemoveBtn:hover {
+  background-color: #c82333 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+#dummyMedicineImage {
+  height: 300px;
+}
+
+/* Footer Spacing */
+footer {
+  background-color: rgb(45, 109, 131);
+  color: white;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+footer .container-fluid {
+  padding: 0 3rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1400px) {
+  .medicineCardParentDiv {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .store-container {
+    padding: 1.5rem 2rem;
+  }
+
+  .medicineCardParentDiv {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  footer .container-fluid {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .store-container {
+    padding: 1rem 1rem;
+  }
+
+  .medicineCardParentDiv {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .medicineCard .card-footer {
+    padding: 0.75rem 1rem !important;
+  }
+
+  footer .container-fluid {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .medicineCardParentDiv {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .medicineCard {
+    max-width: 100%;
+  }
+}
+
+/* Confirmation Modal Styling */
+#confirmingMedicineRemovalModal .modal-content {
+  border-radius: 12px;
+  border: none;
+}
+
+#confirmingMedicineRemovalModal .modal-body {
+  padding: 2rem;
+  text-align: center;
+}
+
+#confirmingMedicineRemovalModal .modal-body h5 {
+  color: #333;
+  font-weight: 600;
+  margin: 0;
+}
+
+#confirmingMedicineRemovalModal .modal-footer {
+  padding: 1rem 2rem;
+  border-top: 1px solid #e0e0e0;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#confirmMedicineRemoveBtn {
+  background-color: rgb(45, 109, 131);
+  color: white;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+#confirmMedicineRemoveBtn:hover {
+  background-color: rgb(35, 89, 111);
+}
+
+#rejectMedicineRemoveBtn {
+  padding: 0.5rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+#medicineImageEditForm .modal-content {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+#medicineImageEditForm .modal-header {
+  background: linear-gradient(
+    135deg,
+    rgb(45, 109, 131) 0%,
+    rgb(58, 141, 169) 100%
+  );
+  color: white;
+  padding: 1.25rem 1.5rem;
+  border-bottom: none;
+}
+
+#medicineImageEditForm .modal-header h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#medicineImageEditForm .modal-header h4::before {
+  content: "\F3EF";
+  font-family: "bootstrap-icons";
+  font-size: 1.3rem;
+}
+
+#medicineImageEditForm .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+#medicineImageEditForm .btn-close:hover {
+  opacity: 1;
+}
+
+#medicineImageEditForm .modal-body {
+  padding: 2rem;
+  background: white;
+}
+
+/* Form Styling */
+#editMedicineImagebox {
+  width: 100%;
+}
+
+#editMedicineImagebox #form {
+  padding: 0;
+}
+
+/* Field Box */
+.field_box {
+  margin-bottom: 1.5rem;
+}
+
+.field_box label {
+  display: block;
+  color: rgb(45, 109, 131);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field_box label::before {
+  content: "\F3EF";
+  font-family: "bootstrap-icons";
+  font-size: 1.1rem;
+}
+
+/* File Input Styling */
+.field_box input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px dashed #d0d0d0;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.field_box input[type="file"]:hover {
+  border-color: rgb(45, 109, 131);
+  background: rgba(45, 109, 131, 0.05);
+}
+
+.field_box input[type="file"]:focus {
+  outline: none;
+  border-color: rgb(45, 109, 131);
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
+}
+
+/* Custom File Input Button */
+.field_box input[type="file"]::file-selector-button {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    rgb(45, 109, 131) 0%,
+    rgb(58, 141, 169) 100%
+  );
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 1rem;
+  transition: all 0.2s;
+}
+
+.field_box input[type="file"]::file-selector-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 109, 131, 0.3);
+}
+
+/* Submit Button */
+#editMedicineImagebox button[type="button"] {
+  background: linear-gradient(
+    135deg,
+    rgb(45, 109, 131) 0%,
+    rgb(58, 141, 169) 100%
+  );
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+#editMedicineImagebox button[type="button"]::before {
+  content: "\F26C";
+  font-family: "bootstrap-icons";
+  font-size: 1.1rem;
+}
+
+#editMedicineImagebox button[type="button"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 109, 131, 0.4);
+}
+
+#editMedicineImagebox button[type="button"]:active {
+  transform: translateY(0);
+}
+
+/* Info Box */
+.info-box {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 109, 131, 0.05) 0%,
+    rgba(58, 141, 169, 0.05) 100%
+  );
+  border-left: 4px solid rgb(45, 109, 131);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.info-box p {
+  margin: 0;
+  color: #555;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-box p::before {
+  content: "\F431";
+  font-family: "bootstrap-icons";
+  color: rgb(45, 109, 131);
+  font-size: 1.1rem;
+}

@@ -1,0 +1,120 @@
+body{
+  background-color: rgb(255, 255, 255);
+}
+
+/* nav old colors{
+  background-color: rgb(103, 29, 146);
+  font-weight: 500;
+  color: white !important; 
+ } */
+  
+nav {
+  background-color: rgb(121, 73, 150);
+  font-weight: 500;
+  /* color: white !important; */
+}
+
+.welcomeSectionDiv img {
+  width: 180px;
+  margin-right: 50px;
+}
+.welcomeSectionBtn {
+  background-color: rgb(121, 73, 150);
+  color: white;
+}
+.welcomeSectionBtn:hover {
+  background-color: rgb(121, 73, 150);
+  color: white;
+}
+.alert-info {
+  background-color: rgb(121, 73, 150);
+  color: white;
+}
+/* .notificationTextBox{
+    background-color: rgb(103, 29, 146);
+    color: white;
+}    */
+
+.btn-close {
+  color: red;
+}
+.notification-panel {
+  max-height: 300px; /* Fixed height */
+  overflow-y: auto; /* Vertical scroll only */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  padding-right: 10px; /* Room for scrollbar */
+}
+.notification {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px; /* less bubble-like */
+}
+    /* h3 {
+      font-weight: 500;
+      border-bottom: 3px solid black;
+      display: inline-block;
+      margin-bottom: 20px;
+    } */
+    .search-box .form-control {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .search-box .btn-search {
+      background-color: rgb(121, 73, 150);
+      color: white;
+      border-radius: 8px;
+      padding: 6px 20px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .appointments-container {
+      max-height: 600px; /* scrollable container */
+      overflow-y: auto;
+      box-shadow: 3px 3px 5px grey;
+    }
+    .appointment-card {
+      background-color:rgb(121, 73, 150);
+      color: white;
+      border-radius: 12px;
+      padding: 15px;
+    }
+    .appointment-card img {
+      width: 70px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      background-color: #ccc;
+    }
+    .btn-custom {
+      background-color: #4a148c;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 5px 12px;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+    .btn-custom:hover {
+      background-color: #6a1b9a;
+    }
+    .status-badge {
+      background-color: #333;
+      border-radius: 12px;
+      padding: 5px 12px;
+      font-size: 0.9rem;
+    }
+    .status-pending { 
+        background-color: #ffc107; 
+        color: #000; 
+    }
+    .status-cancelled { 
+        background-color: #dc3545;
+        color: #fff;
+     }
+    .status-attended{ 
+        background-color: #147233;
+        color: #fff;
+     }
+    .status-rescheduled { 
+        background-color: #354edc;
+        color: #fff;
+     }

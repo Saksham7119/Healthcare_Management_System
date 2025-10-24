@@ -1,0 +1,54 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+}
+nav{
+    font-weight: 500;
+}
+.heroSection{
+    height:300px;
+    display: flex;
+    background-color: rgb(36, 73, 83);
+    color: white;
+    padding: 20px;
+    justify-content: space-around;
+}
+.heroSection p{
+    width: 60%;
+    margin-top:10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.userSelectionImg{
+    border-top-left-radius:32px;
+    border-top-right-radius:32px ;
+}
+
+.loginRedirect{
+    text-decoration: none;
+}
+.bookAppointmentBtn{
+    background-color: rgb(36, 73, 83);
+    color: white;
+    font-weight: 500;
+ }
+.bookAppointmentBtn:hover{
+    background-color: rgb(43, 87, 99);
+    color: white;
+    font-weight: 500;
+}
+.patientLoginBtn{
+    background-color: green;
+    color:white
+}
+.doctorLoginBtn{
+    background-color: rgb(153, 0, 184);
+    color:white
+}
+.manufacturerLoginBtn{
+    background-color: rgb(36, 73, 83 );
+    color:white
+}
+

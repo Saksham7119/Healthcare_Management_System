@@ -1,0 +1,49 @@
+nav{
+    background-color: rgb(121, 73, 150);
+    font-weight: 500;
+}
+
+.medicineCardBtn{
+        background-color: rgb(121, 73, 150);
+        color: white;
+}
+.mainStoreDiv{
+    height: auto;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainStoreDiv {
+  flex: 1; 
+}
+
+footer {
+  background-color: rgb(121, 73, 150);
+  color: white;
+  margin-top: auto;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+#confirmMedicineRemoveBtn{
+  background-color: rgb(121, 73, 150);
+  color: white;
+}
+/* .medicineCard{
+    background-color: rgb(45, 110, 131);
+    box-shadow: 5px 5px 5px black;  
+    border: 2px solid black;
+} */

@@ -1,0 +1,348 @@
+nav {
+  background-color: rgb(121, 73, 150);
+  font-weight: 500;
+  /* color: white !important; */
+}
+.welcomeSectionBtn {
+  background-color: rgb(121, 73, 150);
+  color: white;
+}
+.welcomeSectionBtn:hover {
+  background-color: rgb(121, 73, 150);
+}
+
+.welcomeSectionDiv img {
+  width: 180px;
+  margin-right: 50px;
+}
+.search-box .form-control {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.search-box .btn-search {
+  background-color: rgb(121, 73, 150);
+  color: white;
+  border-radius: 8px;
+  padding: 6px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.appointments-container {
+  max-height: 600px; /* scrollable container */
+  overflow-y: auto;
+  box-shadow: 3px 3px 5px grey;
+}
+.appointment-card {
+  background-color: rgb(121, 73, 150);
+  color: white;
+  border-radius: 12px;
+  padding: 15px;
+}
+.appointment-card img {
+  width: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-color: #ccc;
+}
+.btn-custom {
+  background-color: #4a148c;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.btn-custom:hover {
+  background-color: #6a1b9a;
+}
+.status-badge {
+  background-color: #333;
+  border-radius: 12px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+}
+.status-pending {
+  background-color: #ffc107;
+  color: #000;
+}
+.status-cancelled {
+  background-color: #dc3545;
+  color: #fff;
+}
+.status-attended {
+  background-color: #147233;
+  color: #fff;
+}
+.status-rescheduled {
+  background-color: #354edc;
+  color: #fff;
+}
+
+.stats-card {
+  background-color: rgb(145, 95, 175);
+  color: white;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(121, 73, 150, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(
+    135deg,
+    rgb(121, 73, 150) 0%,
+    rgb(145, 95, 175) 100%
+  );
+  color: white;
+  padding: 1.5rem 2rem;
+  border: none;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-title::before {
+  content: "\F4DB";
+  font-family: "bootstrap-icons";
+  font-size: 1.5rem;
+}
+
+.btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  padding: 2rem;
+  background: white;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-control-custom {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-control-custom:focus {
+  outline: none;
+  border-color: rgb(121, 73, 150);
+  box-shadow: 0 0 0 4px rgba(121, 73, 150, 0.1);
+}
+
+.form-control-custom::placeholder {
+  color: #999;
+}
+
+.form-label-custom {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: white;
+  padding: 0 8px;
+  color: rgb(121, 73, 150);
+  font-size: 0.85rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(121, 73, 150);
+  font-size: 1.1rem;
+}
+
+textarea.form-control-custom {
+  min-height: 100px;
+  resize: vertical;
+  padding-top: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.modal-footer {
+  background: #f8f9fa;
+  padding: 1.25rem 2rem;
+  border: none;
+  gap: 0.75rem;
+}
+
+.btn-custom {
+  padding: 0.65rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-secondary-custom {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary-custom:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+.btn-primary-custom {
+  background: linear-gradient(
+    135deg,
+    rgb(121, 73, 150) 0%,
+    rgb(145, 95, 175) 100%
+  );
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(121, 73, 150, 0.4);
+}
+
+.section-divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: rgb(121, 73, 150);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgb(121, 73, 150),
+    transparent
+  );
+}
+
+.section-divider span {
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+}
+
+/* Demo Button */
+.demo-btn {
+  background: linear-gradient(
+    135deg,
+    rgb(121, 73, 150) 0%,
+    rgb(145, 95, 175) 100%
+  );
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(121, 73, 150, 0.3);
+}
+
+.demo-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(121, 73, 150, 0.4);
+}
+
+.checkbox-group {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group:focus-within {
+            border-color: rgb(121, 73, 150);
+            box-shadow: 0 0 0 4px rgba(121, 73, 150, 0.1);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.65rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .checkbox-item:hover {
+            border-color: rgb(121, 73, 150);
+            background: rgba(121, 73, 150, 0.05);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            accent-color: rgb(121, 73, 150);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + span {
+            color: rgb(121, 73, 150);
+            font-weight: 600;
+        }
+
+        .checkbox-item span {
+            font-size: 0.9rem;
+            color: #333;
+        }
