@@ -1,6 +1,10 @@
 package models;
 
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import utils.DBManager;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,12 +37,21 @@ public class Clinic {
         this.location = location;
     }
 
+    
+    public Clinic(Integer clinicId , String name, String address, String contact, String aboutMe, Integer firstVisitCharges,
+        Integer nextVisitCharges) {
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.aboutMe = aboutMe;
+        this.firstVisitCharges = firstVisitCharges;
+        this.nextVisitCharges = nextVisitCharges;
+    }
+
     public boolean addClinic() {
         boolean flag = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
             String query = "INSERT INTO clinics (name , address, contact , about_me, first_visit_charges , next_visit_charges , doctor_id , location_id) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -61,12 +74,41 @@ public class Clinic {
             }
 
             con.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return flag;
     }
 
+    public ArrayList<Clinic> fetchAllClinics(int doctorId){
+        ArrayList<Clinic> arrayListClinic = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinics where doctor_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, doctorId);
+    
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                arrayListClinic.add(
+                    new Clinic(
+                    rs.getInt("clinic_id"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("contact"),
+                    rs.getString("about_me"),
+                    rs.getInt("first_visit_charges"),
+                    rs.getInt("next_visit_charges")
+                    )
+                );                
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListClinic;
+    }
 
     public Integer getClinicId() {
         return clinicId;

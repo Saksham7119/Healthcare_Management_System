@@ -3,7 +3,11 @@ package models;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import utils.DBManager;
 
 public class ClinicDay {
 
@@ -15,6 +19,11 @@ public class ClinicDay {
 
     public Integer getClinicDayId() {
         return clinicDayId;
+    }
+
+    public ClinicDay(Integer clinicDayId, Day day) {
+        this.clinicDayId = clinicDayId;
+        this.day = day;
     }
 
     public ClinicDay(Clinic clinic, Day day) {
@@ -29,8 +38,7 @@ public class ClinicDay {
     public boolean addClinicDay(Clinic clinic , int dayId){
         boolean flag = false;
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
             String query = "INSERT INTO clinic_days (clinic_id , day_id) VALUES (?,?)";
 
             PreparedStatement ps = con.prepareStatement(query);
@@ -43,12 +51,34 @@ public class ClinicDay {
             }
 
         }
-        catch(ClassNotFoundException | SQLException e){
+        catch(SQLException e){
             e.printStackTrace();
         }
         return flag;
     }   
 
+    public ArrayList<ClinicDay> fetchAllClinicDays(int clinicId){
+        ArrayList<ClinicDay> arrayListClinicDay = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinic_days where clinic_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, clinicId);
+    
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                arrayListClinicDay.add(
+                   new ClinicDay(rs.getInt("clinic_day_id"),
+                   rs.getInt("day_id")
+                )
+                );                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListClinic;
+    }
     public Clinic getClinic() {
         return clinic;
     }

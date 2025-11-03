@@ -71,7 +71,7 @@ public class LoginServlet extends HttpServlet {
     }
     private void createUserFolder(String userId, HttpServletRequest request) {
         // Path to WEB-INF/Uploads
-        String basePath = getServletContext().getRealPath("/WEB-INF/Uploads");
+        String basePath = getServletContext().getRealPath("/WEB-INF/uploads");
         
         File uploadsDir = new File(basePath);
         if (!uploadsDir.exists()) {

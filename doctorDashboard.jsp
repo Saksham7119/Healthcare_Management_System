@@ -66,7 +66,7 @@
           Add Clinic
         </button>
         <button type="button" class="btn welcomeSectionBtn">
-          <a href="DoctorClinic.do">View Clinics</a>
+          <a href="DoctorClinic.do" style="color: white; text-decoration: none">View Clinics</a>
         </button>
       </div>
       <div>
@@ -84,7 +84,7 @@
           <div class="card shadow-sm border-0 h-100 stats-card">
             <div class="card-body text-center">
               <h6 class="">Patient Attended :</h6>
-              <h4 class="fw-bold ">10</h4>
+              <h4 class="fw-bold">10</h4>
             </div>
           </div>
         </div>
@@ -305,49 +305,6 @@
     <!--Your Schedule End-->
 
     <!--Add Clinic Modal Start-->
-    <!-- <div class="modal" id="addClinicModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Add Your Clinic</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="addClinic.do" method="post">
-              <input type="text" name="clinicName" id="clinicName" required />
-              <label for="clinicName">Clinic Name</label>
-
-              <input type="text" name="clinicaddress" id="clinicaddress" required />
-              <label for="clinicaddress">Address</label>
-
-              <input type="tel" name="clinicContact" id="clinicContact" required />
-              <label for="clinicContact">Ph. No.</label>
-
-              <textarea name="aboutClinic" id="aboutClinic" required cols="60" rows="5"></textarea>
-              <label for="aboutClinic">About My Clinic</label>
-
-              <input type="tel" name="clinicContact" id="clinicContact" required />
-              <label for="clinicContact">Ph. No.</label>
-
-              <input type="number" name="firstVisitCharges" id="firstVisitCharges" required />
-              <label for="firstVisitCharges">First Visit Charges?</label>
-
-              <input type="number" name="nextVisitCharges" id="nextVisitCharges" />
-              <label for="nextVisitCharges">Charges From Second Visit?</label>
-
-              <input type="text" name="clinicLocation" id="clinicLocation" />
-              <label for="clinicLocation">Location?</label>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Add</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <div class="modal fade" id="addClinicModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
@@ -357,7 +314,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="addClinic.do" method="post" id="clinicForm">
+            <form action="addClinic.do" method="post" id="clinicForm" enctype="multipart/form-data">
               <div class="form-group">
                 <i class="bi bi-hospital input-icon"></i>
                 <input type="text" name="clinicName" id="clinicName" class="form-control-custom"
@@ -386,17 +343,19 @@
                     placeholder="City, State" />
                   <label for="clinicLocation" class="form-label-custom">Location</label>
                 </div> -->
-                
+
                 <div class="form-group">
                   <i class="bi bi-pin-map input-icon"></i>
                   <select name="clinicCity" id="clinicCity" class="form-control-custom" required>
-                    <option value="" disabled selected>Select City Of Your Clinic</option>
+                    <option value="" disabled selected>
+                      Select City Of Your Clinic
+                    </option>
                   </select>
                   <label for="city" class="form-label-custom">City</label>
                 </div>
               </div>
 
-          <!-- <div class="form-group">
+              <!-- <div class="form-group">
             <i class="bi bi-capsule input-icon"></i>
             <select name="days" id="days" class="form-control-custom" multiple size="5" required>
               <option value="0" disabled>Select Clinic Days</option>
@@ -405,61 +364,66 @@
             <small class="form-text-helper">Hold Ctrl (Cmd on Mac) to select multiple</small>
           </div> -->
 
-           <div class="form-group">
-                            <div class="checkbox-group">
-                                <label class="form-label-custom" style="position: relative; top: 0; left: 0; margin-bottom: 1rem;">Days clinic will open?</label>
-                                <div class="checkbox-grid" id="days"></div>
-                            </div>
-                        </div>
+              <div class="form-group">
+                <div class="checkbox-group">
+                  <label class="form-label-custom" style="
+                      position: relative;
+                      top: 0;
+                      left: 0;
+                      margin-bottom: 1rem;
+                    ">Days clinic will open?</label>
+                  <div class="checkbox-grid" id="days"></div>
+                </div>
+              </div>
 
-          <div class="form-group">
-            <i class="bi bi-image input-icon"></i>
-            <input type="file" name="clinicImage" id="clinicImage" class="form-control-custom file-input"
-              accept="image/*" />
-            <label for="clinicImage" class="form-label-custom">Clinic Image</label>
+              <div class="form-group">
+                <i class="bi bi-image input-icon"></i>
+                <input type="file" name="clinicImage" id="clinicImage" class="form-control-custom file-input"
+                  accept="image/*" />
+                <label for="clinicImage" class="form-label-custom">Clinic Image</label>
+              </div>
+
+              <div class="form-group">
+                <i class="bi bi-card-text input-icon" style="top: 2rem"></i>
+                <textarea name="aboutClinic" id="aboutClinic" class="form-control-custom"
+                  placeholder="Tell us about your clinic, specialties, facilities..." required></textarea>
+                <label for="aboutClinic" class="form-label-custom">About My Clinic</label>
+              </div>
+
+              <div class="section-divider">
+                <span><i class="bi bi-cash-coin me-2"></i>Consultation
+                  Charges</span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <i class="bi bi-currency-rupee input-icon"></i>
+                  <input type="number" name="firstVisitCharges" id="firstVisitCharges" class="form-control-custom"
+                    placeholder="0" min="0" required />
+                  <label for="firstVisitCharges" class="form-label-custom">First Visit Charges</label>
+                </div>
+
+                <div class="form-group">
+                  <i class="bi bi-currency-rupee input-icon"></i>
+                  <input type="number" name="nextVisitCharges" id="nextVisitCharges" class="form-control-custom"
+                    placeholder="0" min="0" />
+                  <label for="nextVisitCharges" class="form-label-custom">Follow-up Charges</label>
+                </div>
+              </div>
+            </form>
           </div>
-
-          <div class="form-group">
-            <i class="bi bi-card-text input-icon" style="top: 2rem"></i>
-            <textarea name="aboutClinic" id="aboutClinic" class="form-control-custom"
-              placeholder="Tell us about your clinic, specialties, facilities..." required></textarea>
-            <label for="aboutClinic" class="form-label-custom">About My Clinic</label>
+          <div class="modal-footer">
+            <button type="button" class="btn-custom btn-secondary-custom" data-bs-dismiss="modal">
+              <i class="bi bi-x-circle"></i>
+              Close
+            </button>
+            <button type="submit" form="clinicForm" class="btn-custom btn-primary-custom">
+              <i class="bi bi-check-circle"></i>
+              Add Clinic
+            </button>
           </div>
-
-          <div class="section-divider">
-            <span><i class="bi bi-cash-coin me-2"></i>Consultation
-              Charges</span>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <i class="bi bi-currency-rupee input-icon"></i>
-              <input type="number" name="firstVisitCharges" id="firstVisitCharges" class="form-control-custom"
-                placeholder="0" min="0" required />
-              <label for="firstVisitCharges" class="form-label-custom">First Visit Charges</label>
-            </div>
-
-            <div class="form-group">
-              <i class="bi bi-currency-rupee input-icon"></i>
-              <input type="number" name="nextVisitCharges" id="nextVisitCharges" class="form-control-custom"
-                placeholder="0" min="0" />
-              <label for="nextVisitCharges" class="form-label-custom">Follow-up Charges</label>
-            </div>
-          </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn-custom btn-secondary-custom" data-bs-dismiss="modal">
-            <i class="bi bi-x-circle"></i>
-            Close
-          </button>
-          <button type="submit" form="clinicForm" class="btn-custom btn-primary-custom">
-            <i class="bi bi-check-circle"></i>
-            Add Clinic
-          </button>
         </div>
       </div>
-    </div>
     </div>
     <!--Add Clinic Modal End-->
 

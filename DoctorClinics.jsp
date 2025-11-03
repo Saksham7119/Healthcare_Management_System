@@ -98,24 +98,8 @@
     <!-----------------Store Start----------->
     <div class="mb-5 mx-5 mt-3">
       <h4 class="mb-3 border-bottom pb-2">My Listed  Clinics</h4>
-      <div class="container my-4 mainStoreDiv" id="mainStoreDiv">
-        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 clinicCardParentDiv" id="clinicCardParentDiv">
-          <!-- <div class="col">
-            <div class="card h-100">
-              <img
-                src="static/media/images/medicine.png"
-                class="card-img-top"
-                alt="..."
-              />
-              <div class="card-body">
-                <h5 class="card-title">Medicine Name</h5>
-                <p class="card-text">Some description...</p>
-                <button class="btn medicineCardBtn medicineCardEditBtn">Edit</button>
-                <button class="btn medicineCardBtn medicineCardRemoveBtn">Remove</button>
-              </div>
-            </div>
-          </div> -->
-      </div>
+      <div class="container my-4 mainClinicDiv" id="mainClinicDiv">
+        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 clinicCardParentDiv" id="clinicCardParentDiv"></div>
     </div>
     <!-----------------Store End----------->
 
@@ -153,51 +137,22 @@
 
     <!--Footer end-->
     
-    
-    <!--Edit Medicine Card Start-->
-        <div class="modal fade" id="medicineEditForm" tabindex="-1">
-        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title">Student Form</h5> -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="form_box">
-                        <div id="success" class="message">Success</div>
-                        <div id="error" class="message">Failed</div>
 
-                        <div id="caption">
-                            Student Registration
-                        </div>
-                        <form id="form" class="py-3">
-                            <input type="hidden" id="medicine_id" value="">
-                            <div class="field_box">
-                                <label for="medicine_name">Medicine Name</label>
-                                <input type="text" id="medicine_name">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Edit Medicine Card End-->
-    <!--Confirming medicine removal modal-->
-<div class="modal fade " id="confirmingMedicineRemovalModal" tabindex="-1" aria-labelledby="confirmingMedicineRemovalModal" aria-hidden="true">
+    <!--Confirming Clinic removal modal-->
+<div class="modal fade " id="confirmingClinicRemoveModal" tabindex="-1" aria-labelledby="confirmingClinicRemoveModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h5>Are You Sure you want to remove this medicine?</h5>
+        <h5>Are You Sure you want to remove this Clinic?</h5>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="rejectMedicineRemoveBtn" data-bs-dismiss="modal">No</button>
-        <button type="button" id="confirmMedicineRemoveBtn" class="btn ">Yes</button>
+        <button type="button" class="btn btn-secondary" id="rejectClinicRemoveBtn" data-bs-dismiss="modal">No</button>
+        <button type="button" id="confirmClinicRemoveBtn" class="btn ">Yes</button>
       </div>
     </div>
   </div>
 </div>
-    <!---Confirming medicine removal modal->
+    <!---Confirming Clinic removal modal->
 
     <!--------------------------Scripting Section Starts Here---------------------------->
     <script
