@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mysql.cj.protocol.Resultset;
+import utils.DBManager;
 
 public class MedicineDenominationImage {
 
@@ -38,8 +37,7 @@ public class MedicineDenominationImage {
 
     public static void savePicPath(int denominationId, String picPath) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
 
             String query = "insert into medicine_denomination_images (image , medicine_denomination_id) VALUES(?,?)";
 
@@ -51,7 +49,7 @@ public class MedicineDenominationImage {
             ps.executeUpdate();
 
             con.close();
-        } catch(SQLException|ClassNotFoundException e) {
+        } catch(SQLException e) {
             e.printStackTrace();
         }
     }
@@ -60,8 +58,7 @@ public class MedicineDenominationImage {
         Map<Integer, String> imageMap = new HashMap<>();
 
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
 
             String query = "SELECT image FROM medicine_denomination_images WHERE medicine_denomination_id = ?";
             PreparedStatement ps = con.prepareStatement(query); 
@@ -75,15 +72,12 @@ public class MedicineDenominationImage {
                         rs.getString("image")
                     );
                 }
-            } // <- rs is automatically closed here.
-        
-        
-            // MANDATORY: Close resources outside the loop
+            } 
             ps.close();
              con.close();
 
         }
-         catch (ClassNotFoundException | SQLException e ) {
+         catch (SQLException e ) {
             e.printStackTrace();
         }
 

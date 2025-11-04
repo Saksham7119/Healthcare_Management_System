@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import utils.DBManager;
+
 public class MedicineDenomination {
 
     private Integer medicineDenominationId;
@@ -127,8 +129,7 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
       MedicineDenomination medicineDenom = new MedicineDenomination();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
             String query = "select * from medicine_denominations where medicine_denomination_id = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1 , denominationId);
@@ -140,7 +141,7 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
 
             con.close();
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

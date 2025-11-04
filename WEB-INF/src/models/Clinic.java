@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import utils.DBManager;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,14 +37,16 @@ public class Clinic {
     }
 
     
-    public Clinic(Integer clinicId , String name, String address, String contact, String aboutMe, Integer firstVisitCharges,
-        Integer nextVisitCharges) {
+    public Clinic(Integer clinicId, String name, String address, String contact, String aboutMe,
+            Integer firstVisitCharges, Integer nextVisitCharges, Location location) {
+        this.clinicId = clinicId;
         this.name = name;
         this.address = address;
         this.contact = contact;
         this.aboutMe = aboutMe;
         this.firstVisitCharges = firstVisitCharges;
         this.nextVisitCharges = nextVisitCharges;
+        this.location = location;
     }
 
     public boolean addClinic() {
@@ -90,6 +91,11 @@ public class Clinic {
     
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+
+                Location location = new Location();
+                int locationId = rs.getInt("location_id");
+                location.getLocationById(locationId);
+
                 arrayListClinic.add(
                     new Clinic(
                     rs.getInt("clinic_id"),
@@ -98,7 +104,8 @@ public class Clinic {
                     rs.getString("contact"),
                     rs.getString("about_me"),
                     rs.getInt("first_visit_charges"),
-                    rs.getInt("next_visit_charges")
+                    rs.getInt("next_visit_charges"),
+                    location
                     )
                 );                
             }

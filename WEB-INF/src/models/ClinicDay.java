@@ -1,7 +1,6 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,19 +65,23 @@ public class ClinicDay {
             ps.setInt(1, clinicId);
     
             ResultSet rs = ps.executeQuery();
+            
             while(rs.next()){
+                Day day = new Day();
+                int dayId = rs.getInt("day_id");
+                day.getDayById(dayId);
+
                 arrayListClinicDay.add(
-                   new ClinicDay(rs.getInt("clinic_day_id"),
-                   rs.getInt("day_id")
-                )
+                   new ClinicDay(rs.getInt("clinic_day_id"),day)
                 );                
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return arrayListClinic;
+        return arrayListClinicDay;
     }
+
     public Clinic getClinic() {
         return clinic;
     }

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import utils.DBManager;
+
 public class Location {
 
     private Integer locationId;
@@ -55,6 +57,30 @@ public class Location {
         return flag;
     }
 
+    
+
+    public Location getLocationById(int locationId){
+      Location location = new Location();
+
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from locations where location_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1 , locationId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                location.setName(rs.getString("name"));
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return location;
+    }
 
     public Integer getLocationId() {
         return locationId;

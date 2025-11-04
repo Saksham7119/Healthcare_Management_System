@@ -2,7 +2,9 @@ package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import utils.DBManager;
 
@@ -14,6 +16,12 @@ public class ClinicImage {
 
     public ClinicImage() {}
     
+
+    public ClinicImage(Integer clinicImageId, String image) {
+        this.clinicImageId = clinicImageId;
+        this.image = image;
+    }
+
 
     public ClinicImage(Clinic clinic, String image) {
         this.clinic = clinic;
@@ -41,6 +49,30 @@ public class ClinicImage {
         return flag;
     }
 
+     public ArrayList<ClinicImage> fetchAllClinicImages(int clinicId){
+        ArrayList<ClinicImage> arrayListClinicImage = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinic_images where clinic_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, clinicId);
+    
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                arrayListClinicImage.add(
+                    new ClinicImage( 
+                    rs.getInt("clinic_image_id"),
+                    rs.getString("image")
+                    )
+                );
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListClinicImage;
+    }
 
     public Integer getClinicImageId() {
         return clinicImageId;

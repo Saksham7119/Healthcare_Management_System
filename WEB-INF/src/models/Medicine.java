@@ -1,11 +1,12 @@
 package models;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import utils.DBManager;
 
 public class Medicine {
 
@@ -49,10 +50,8 @@ public class Medicine {
     public boolean addMedicine(){
         boolean flag = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
             String query = "INSERT INTO medicines (name , description, veg, side_effect, manufacturer_id) VALUES (?,?,?,?,?)";
-            // PreparedStatement ps = con.prepareStatement(query);
             PreparedStatement ps = con.prepareStatement(query , PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, name);
@@ -73,7 +72,7 @@ public class Medicine {
 
             con.close();
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return flag;
@@ -82,8 +81,7 @@ public class Medicine {
     public ArrayList<Medicine> collectMedicines(int manufacturerId){
         ArrayList<Medicine> medicine = new ArrayList<>();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
             String query = "select * from medicines where manufacturer_id = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1 , manufacturerId);
@@ -103,7 +101,7 @@ public class Medicine {
 
             con.close();
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -113,10 +111,7 @@ public class Medicine {
     public boolean deleteMedicine(int medicineId) {
     boolean flag = false;
     try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234"
-        );
+        Connection con = DBManager.getConnection();
         String query = "DELETE FROM medicines WHERE medicine_id = ?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, medicineId);
@@ -127,7 +122,7 @@ public class Medicine {
         }
 
         con.close();
-    } catch (ClassNotFoundException | SQLException e) {
+    } catch (SQLException e) {
         e.printStackTrace();
     }
     return flag;

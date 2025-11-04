@@ -62,9 +62,7 @@ public ArrayList<MedicineFormat> collectFormats(List<Integer> medicineIds){
     }
 
     try {
-        // DBManager.getConnection();
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+        Connection con = DBManager.getConnection();
         
         String idList = medicineIds.stream()
             .map(String::valueOf)
@@ -94,7 +92,7 @@ public ArrayList<MedicineFormat> collectFormats(List<Integer> medicineIds){
 
         con.close();
 
-    } catch (ClassNotFoundException | SQLException e) {
+    } catch (SQLException e) {
         e.printStackTrace();
     }
     return medicineFormat;
