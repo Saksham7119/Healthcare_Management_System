@@ -7,7 +7,7 @@ nav{
         background-color: rgb(121, 73, 150);
         color: white;
 }
-.mainStoreDiv{
+.mainClinicDiv{
     height: auto;
 }
 html, body {
@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
 }
 
-.mainStoreDiv {
+.mainClinicDiv {
   flex: 1; 
 }
 
@@ -38,12 +38,343 @@ footer {
   margin-right: -50vw;
 }
 
-#confirmMedicineRemoveBtn{
-  background-color: rgb(121, 73, 150);
+.clinic-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(121, 73, 150, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid transparent;
+  width: 400px;
+}
+/* 
+.clinic-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(121, 73, 150, 0.25);
+  border-color: rgb(121, 73, 150);
+} */
+
+/* Image Section */
+.clinic-card-image-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgb(121, 73, 150) 0%, rgb(161, 113, 190) 100%);
+}
+
+.clinic-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit:fill;
+  transition: transform 0.4s ease;
+}
+
+.clinic-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(121, 73, 150, 0.3));
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.clinic-id-badge {
+  background: white;
+  color: rgb(121, 73, 150);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Card Body */
+.clinic-card-body {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header */
+.clinic-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid rgba(121, 73, 150, 0.1);
+}
+
+.clinic-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgb(121, 73, 150);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.clinic-status-badge {
+  background: linear-gradient(135deg, rgb(121, 73, 150), rgb(161, 113, 190));
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(121, 73, 150, 0.3);
+}
+
+/* Info Grid */
+.clinic-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(121, 73, 150, 0.04);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  background: rgba(121, 73, 150, 0.08);
+  transform: translateX(4px);
+}
+
+.info-icon {
+  color: rgb(121, 73, 150);
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgb(121, 73, 150);
+  opacity: 0.8;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #2c3e50;
+  font-weight: 500;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* About Section */
+.clinic-about {
+  background: linear-gradient(135deg, rgba(121, 73, 150, 0.05), rgba(161, 113, 190, 0.05));
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid rgb(121, 73, 150);
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: rgb(121, 73, 150);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.about-header i {
+  font-size: 16px;
+}
+
+.about-text {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.about-text::-webkit-scrollbar {
+  width: 4px;
+}
+
+.about-text::-webkit-scrollbar-track {
+  background: rgba(121, 73, 150, 0.1);
+  border-radius: 4px;
+}
+
+.about-text::-webkit-scrollbar-thumb {
+  background: rgb(121, 73, 150);
+  border-radius: 4px;
+}
+
+/* Pricing Cards */
+.clinic-pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.pricing-card {
+  background: white;
+  border: 2px solid rgba(121, 73, 150, 0.2);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  border-color: rgb(121, 73, 150);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(121, 73, 150, 0.15);
+}
+
+.pricing-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgb(121, 73, 150), rgb(161, 113, 190));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pricing-icon i {
+  color: white;
+  font-size: 20px;
+}
+
+.pricing-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pricing-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgb(121, 73, 150);
+  opacity: 0.8;
+}
+
+.pricing-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(121, 73, 150);
+}
+
+/* Footer Actions */
+.clinic-card-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 2px solid rgba(121, 73, 150, 0.1);
+}
+
+.btn-clinic-action {
+  padding: 16px;
+  border: none;
+  background: white;
+  color: rgb(121, 73, 150);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.btn-clinic-action i {
+  font-size: 16px;
+}
+
+.btn-edit {
+  border-right: 1px solid rgba(121, 73, 150, 0.1);
+}
+
+.btn-edit:hover {
+  background: linear-gradient(135deg, rgb(121, 73, 150), rgb(161, 113, 190));
   color: white;
 }
-/* .medicineCard{
-    background-color: rgb(45, 110, 131);
-    box-shadow: 5px 5px 5px black;  
-    border: 2px solid black;
-} */
+
+.btn-remove {
+  color: #dc3545;
+}
+
+.btn-remove:hover {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-clinic-action:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Grid */
+#clinicCardParentDiv {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  #clinicCardParentDiv {
+    grid-template-columns: 1fr;
+  }
+  
+  .clinic-pricing {
+    grid-template-columns: 1fr;
+  }
+  
+  .clinic-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .clinic-status-badge {
+    align-self: flex-start;
+  }
+}

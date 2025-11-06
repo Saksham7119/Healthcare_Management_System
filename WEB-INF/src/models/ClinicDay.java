@@ -20,9 +20,10 @@ public class ClinicDay {
         return clinicDayId;
     }
 
-    public ClinicDay(Integer clinicDayId, Day day) {
+    public ClinicDay(Integer clinicDayId, Day day , Clinic clinic) {
         this.clinicDayId = clinicDayId;
         this.day = day;
+        this.clinic = clinic;
     }
 
     public ClinicDay(Clinic clinic, Day day) {
@@ -67,12 +68,16 @@ public class ClinicDay {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                Day day = new Day();
+                Clinic clinic = null;
+                int clinicIdFromDb = rs.getInt("clinic_id");
+                clinic = new Clinic().getClinicyById(clinicIdFromDb);
+                
+                Day day = null;
                 int dayId = rs.getInt("day_id");
-                day.getDayById(dayId);
+                day = new Day().getDayById(dayId);
 
                 arrayListClinicDay.add(
-                   new ClinicDay(rs.getInt("clinic_day_id"),day)
+                   new ClinicDay(rs.getInt("clinic_day_id"),day, clinic)
                 );                
             }
         } catch (SQLException e) {

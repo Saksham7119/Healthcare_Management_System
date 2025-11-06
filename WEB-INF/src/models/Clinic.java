@@ -91,10 +91,9 @@ public class Clinic {
     
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-
-                Location location = new Location();
+                Location location = null;
                 int locationId = rs.getInt("location_id");
-                location.getLocationById(locationId);
+                location = new Location().getLocationById(locationId);
 
                 arrayListClinic.add(
                     new Clinic(
@@ -115,6 +114,29 @@ public class Clinic {
         }
 
         return arrayListClinic;
+    }
+
+    public Clinic getClinicyById(int clinicId){
+      Clinic clinic = new Clinic();
+
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from clinics where clinic_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1 , clinicId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                clinic.setClinicId(rs.getInt("clinic_id"));
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clinic;
     }
 
     public Integer getClinicId() {

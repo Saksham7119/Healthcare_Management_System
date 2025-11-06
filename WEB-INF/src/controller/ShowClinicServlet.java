@@ -16,6 +16,7 @@ import models.ClinicDay;
 import models.ClinicImage;
 import models.Day;
 import models.Doctor;
+import models.Location;
 import models.User;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,15 @@ public class ShowClinicServlet extends HttpServlet {
     Doctor doctor = (Doctor)session.getAttribute("doctor");
     // User user = (User)session.getAttribute("user"); // Not used, can be removed
 
+    if (doctor == null) {
+            // Log the error for debugging
+            System.err.println("ERROR: Doctor object not found in session for showClinics.do"); 
+            
+            // Send an unauthorized or redirect response
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Session expired or user not logged in."); 
+            return; // Stop further execution
+        }
+
     // --- 1. Fetch ALL Clinics for the Doctor ---
     Clinic clinic = new Clinic();
     ArrayList<Clinic> arrayListClinics = clinic.fetchAllClinics(doctor.getDoctorId());
@@ -35,6 +45,7 @@ public class ShowClinicServlet extends HttpServlet {
     // --- 2. Initialize aggregated lists for Days and Images ---
     ArrayList<ClinicDay> arrayListClinicDays = new ArrayList<>();
     ArrayList<ClinicImage> arrayListClinicImages = new ArrayList<>();
+
     
     // --- 3. Loop through EACH Clinic to fetch its Days and Images ---
     ClinicDay clinicDayModel = new ClinicDay();

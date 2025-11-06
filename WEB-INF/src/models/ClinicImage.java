@@ -17,9 +17,10 @@ public class ClinicImage {
     public ClinicImage() {}
     
 
-    public ClinicImage(Integer clinicImageId, String image) {
+    public ClinicImage(Integer clinicImageId, String image, Clinic clinic) {
         this.clinicImageId = clinicImageId;
         this.image = image;
+        this.clinic = clinic;
     }
 
 
@@ -59,10 +60,14 @@ public class ClinicImage {
     
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
+                Clinic clinic = null;
+                int clinicIdFromDb = rs.getInt("clinic_id");
+                clinic = new Clinic().getClinicyById(clinicIdFromDb);
                 arrayListClinicImage.add(
                     new ClinicImage( 
                     rs.getInt("clinic_image_id"),
-                    rs.getString("image")
+                    rs.getString("image"),
+                    clinic
                     )
                 );
             }

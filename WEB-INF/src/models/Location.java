@@ -27,7 +27,6 @@ public class Location {
         this.city = city;
     }
 
-
     public boolean addLocation() {
         boolean flag = false;
 
@@ -61,6 +60,7 @@ public class Location {
 
     public Location getLocationById(int locationId){
       Location location = new Location();
+      City city = new City();
 
         try {
             Connection con = DBManager.getConnection();
@@ -70,7 +70,9 @@ public class Location {
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
+                location.setLocationId(rs.getInt("location_id"));
                 location.setName(rs.getString("name"));
+                location.setCity(city.getCityById(rs.getInt("city_id")));
             }
 
             con.close();
