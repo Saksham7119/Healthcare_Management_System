@@ -11,6 +11,7 @@ public class UserNotification {
     private Integer notificationID;
     private String notificationMessage;
     private User user;
+    private String createdAt;
 
     public UserNotification(){}
     
@@ -31,6 +32,12 @@ public class UserNotification {
     public UserNotification(String notificationMessage, User user) {
         this.notificationMessage = notificationMessage;
         this.user = user;
+    }
+
+    public UserNotification( String notificationMessage, Integer notificationID,String createdAt) {
+        this.notificationMessage = notificationMessage;
+        this.notificationID = notificationID;
+        this.createdAt = createdAt;
     }
 
     public boolean addNotification() {
@@ -76,7 +83,8 @@ public class UserNotification {
                 notifications.add(
                     new UserNotification(
                         rs.getString("notification_message"),
-                        rs.getInt("notification_id")
+                        rs.getInt("notification_id"),
+                        rs.getString("created_at")
                     )
                 );
             }

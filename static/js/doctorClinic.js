@@ -96,7 +96,7 @@ window.addEventListener("DOMContentLoaded", function () {
                   </div>
 
                   <div class="info-item">
-                    <i class="bi bi-calendar"></i>
+                    <i class="bi bi-calendar-day info-icon"></i>
                     <div class="info-content">
                       <span class="info-label">Days Clinic Will Open?</span>
                       <span class="info-value">${days}</span>
@@ -152,7 +152,6 @@ window.addEventListener("DOMContentLoaded", function () {
       }
       clinicCardParentDiv.innerHTML = cardHTMLs.join("");
     });
-});
 
 // const searchInput = document.getElementById("searchClinicInput");
 // if (searchInput) {
@@ -245,35 +244,32 @@ window.addEventListener("DOMContentLoaded", function () {
 //   "#confirmMedicineRemoveBtn"
 // );
 
-// clinicCardParentDiv.addEventListener("click", (e) => {
-//   if (e.target.classList.contains("clinicCardRemoveBtn")) {
-//     const cardDiv = e.target.closest(".col");
-//     const denominationId = cardDiv.querySelector(".denominationId").value;
+const confirmingClinicRemoveModal = new bootstrap.Modal(document.getElementById("confirmingClinicRemoveModal"))
 
-//     confirmingMedicineRemovalModal.show();
+clinicCardParentDiv.addEventListener("click", (e) => {
+  if (e.target.classList.contains("clinicCardRemoveBtn")) {
+    const cardDiv = e.target.closest(".col");
+    const clinicId = cardDiv.querySelector(".clinicId").value;
 
-//     const confirmHandler = () => {
-//       fetch("deleteMedicine.do", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//         body: "denominationId=" + encodeURIComponent(denominationId)
-//       })
-//         .then((res) => res.text())
-//         .then((msg) => console.log("Medicine Denomination Deleted", msg))
+    confirmingClinicRemoveModal.show();
 
-//       cardDiv.remove();
-//       confirmingMedicineRemovalModal.hide();
-//       confirmMedicineRemoveBtn.removeEventListener('click', confirmHandler);
-//     };
+    const confirmHandler = () => {
+      fetch("removeClinic.do", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "clinicId=" + encodeURIComponent(clinicId)
+      })
+        .then((res) => res.text())
+        .then((msg) => console.log("Clinic Data Deleted", msg))
 
-//     confirmMedicineRemoveBtn.addEventListener("click", confirmHandler);
-//   }
+      cardDiv.remove();
+      confirmingClinicRemoveModal.hide();
+      confirmClinicRemoveBtn.removeEventListener('click', confirmHandler);
+    };
 
-//   // ---------Handling Image Edit Button Click --------------------
-//   if (e.target.classList.contains("medicineImageEditBtn")) {
-//     currentDenominationId = e.target.closest(".col").querySelector(".denominationId").value;
-//     console.log("DenomID for image upload:", currentDenominationId);
+    confirmClinicRemoveBtn.addEventListener("click", confirmHandler);
+  }
 
-//     // Hide/reset form logic might go here
-//   }
-// });
+  }
+)
+});

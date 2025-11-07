@@ -50,14 +50,6 @@ footer {
   border: 2px solid transparent;
   width: 400px;
 }
-/* 
-.clinic-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(121, 73, 150, 0.25);
-  border-color: rgb(121, 73, 150);
-} */
-
-/* Image Section */
 .clinic-card-image-wrapper {
   position: relative;
   height: 200px;
@@ -68,8 +60,7 @@ footer {
 .clinic-card-image {
   width: 100%;
   height: 200px;
-  object-fit:fill;
-  transition: transform 0.4s ease;
+  object-fit:fill;  
 }
 
 .clinic-card-overlay {
@@ -85,18 +76,6 @@ footer {
   padding: 15px;
 }
 
-.clinic-id-badge {
-  background: white;
-  color: rgb(121, 73, 150);
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* Card Body */
 .clinic-card-body {
   padding: 24px;
   flex: 1;
@@ -105,7 +84,6 @@ footer {
   gap: 20px;
 }
 
-/* Header */
 .clinic-header {
   display: flex;
   justify-content: space-between;
@@ -137,7 +115,6 @@ footer {
   box-shadow: 0 2px 8px rgba(121, 73, 150, 0.3);
 }
 
-/* Info Grid */
 .clinic-info-grid {
   display: flex;
   flex-direction: column;
@@ -377,4 +354,9 @@ footer {
   .clinic-status-badge {
     align-self: flex-start;
   }
+}
+
+#confirmClinicRemoveBtn{
+  background-color: rgb(121, 73, 150);
+  color: white;
 }

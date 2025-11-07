@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import models.Location;
 import models.User;
+import models.UserNotification;
 import models.City;
 import models.Clinic;
 import models.ClinicDay;
@@ -123,8 +124,11 @@ public class AddClinicServlet extends HttpServlet {
         location.addLocation();
 
         Clinic clinic = new Clinic(clinicName, clinicAddress, contact, aboutClinic, doctor, firstVisitCharges,nextVisitCharges, location);
-        clinic.addClinic();
-
+        Boolean clinicAdded = clinic.addClinic();
+        if (clinicAdded) {
+            new UserNotification("Clinic " + clinic.getName() + " is added in your profile!", user).addNotification();
+        }
+            
         ClinicImage clinicImage = new ClinicImage(clinic , clinicImagePath);
         if(clinicImage.addClinicImage()) System.out.println("Clinic Image is added " + clinicImagePath);
         else System.out.println("Clinic Image is not added "+ clinicImagePath);

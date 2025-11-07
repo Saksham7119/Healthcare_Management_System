@@ -54,7 +54,7 @@ public class Clinic {
         try {
             Connection con = DBManager.getConnection();
             String query = "INSERT INTO clinics (name , address, contact , about_me, first_visit_charges , next_visit_charges , doctor_id , location_id) VALUES (?,?,?,?,?,?,?,?)";
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, name);
             ps.setString(2, address);
@@ -76,6 +76,31 @@ public class Clinic {
 
             con.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public Boolean removeClinic(int clinicId){
+        Boolean flag = false;
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "DELETE FROM clinics WHERE  clinic_id = ?";
+            PreparedStatement ps = con.prepareStatement(query , PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, clinicId);
+
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                while (rs.next()) {
+                    this.clinicId = rs.getInt(1);
+                }
+                
+                flag = true;
+            }
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return flag;
@@ -128,6 +153,7 @@ public class Clinic {
 
             while(rs.next()){
                 clinic.setClinicId(rs.getInt("clinic_id"));
+                clinic.setName(rs.getString("name"));
             }
 
             con.close();

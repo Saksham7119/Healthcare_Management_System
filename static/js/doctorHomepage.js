@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", function () {
             obj.notificationID +
             '">' +
             "<span>" +
-            obj.notificationMessage + " at " + new Date().toDateString() +
+            obj.notificationMessage + " at " + obj.createdAt +
             "</span>" +
             '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
             "</div>" 

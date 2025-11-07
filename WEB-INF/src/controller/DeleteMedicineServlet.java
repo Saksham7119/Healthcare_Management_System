@@ -25,7 +25,8 @@ public class DeleteMedicineServlet extends HttpServlet{
         // Boolean isDeleted = medicine.deleteMedicine(medicineId);
 
         Integer denominationId = Integer.parseInt(request.getParameter("denominationId"));
-        MedicineDenomination medicineDenomination = new MedicineDenomination();
+        MedicineDenomination medicineDenomination = new MedicineDenomination().getDenominationNameById(denominationId);
+        Integer denominationName = medicineDenomination.getDenomination();
         Boolean isDeleted = medicineDenomination.deleteDenomination(denominationId);
 
         HttpSession session = request.getSession();
@@ -33,20 +34,9 @@ public class DeleteMedicineServlet extends HttpServlet{
         
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
-        
-        // if(isDeleted){
-        //     UserNotification userNotification = new UserNotification("You deleted a Medicine "+ medicine.getName() , user);
-        //     userNotification.addNotification();
-        //     response.getWriter().write("Medicine Deleted successfully");
-        // } 
-        // else{
-        //     UserNotification userNotification = new UserNotification("Medicine Deletion Failed for "+ medicine.getName() , user);
-        //     userNotification.addNotification();
-        //     response.getWriter().write("Medicine Deletion Failed");
-        // } 
 
         if(isDeleted){
-            UserNotification userNotification = new UserNotification("You deleted a Medicine  denomination "+ user);
+            UserNotification userNotification = new UserNotification("You deleted a Medicine  denomination "+ denominationName + user);
             userNotification.addNotification();
             response.getWriter().write("Medicine Deleted successfully");
         } 
