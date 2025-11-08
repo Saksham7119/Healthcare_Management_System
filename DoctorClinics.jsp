@@ -97,7 +97,7 @@
 
     <!-----------------Store Start----------->
     <div class="mb-5 mx-5 mt-3">
-      <h4 class="mb-3 border-bottom pb-2">My Listed  Clinics</h4>
+      <h4 class="mb-3 border-bottom pb-2 clinicTitle"><i class="bi bi-hospital"></i> My Clinics</h4>
       <div class="container my-4 mainClinicDiv" id="mainClinicDiv">
         <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 clinicCardParentDiv" id="clinicCardParentDiv"></div>
     </div>

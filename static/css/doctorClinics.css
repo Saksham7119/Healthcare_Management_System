@@ -26,6 +26,13 @@ body {
   flex: 1; 
 }
 
+.clinicTitle{
+  color:rgb(121, 73, 150) ;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
 footer {
   background-color: rgb(121, 73, 150);
   color: white;

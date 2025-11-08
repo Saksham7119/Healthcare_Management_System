@@ -186,44 +186,161 @@
       --%>
 
       <!--------------------------Configure Manufacturer Modal Start---------------------------->
-       <div class="modal" id="configureManufacturerModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-primary">Fill Your Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="configureManufacturer.do" method="post" id="configureManufacturerForm">
-                <div class="form-floating mb-3">
-                  <input type="text" name="companyName" id="companyName" required placeholder="Enter Your Company Name"
-                    class="form-control" />
-                  <label for="companyName">Company Name</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="email" name="companyEmail" id="companyEmail" required placeholder="Enter Company Email"
-                    class="form-control" />
-                  <label for="companyEmail">Company Email</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="text" name="companyWebsite" id="companyWebsite" placeholder="Company Website Link"
-                    class="form-control" />
-                  <label for="companyWebsite">Website Link(if any)</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="text" name="licenceNumber" id="licenceNumber" placeholder="Licence Number"
-                    class="form-control" />
-                  <label for="licenceNumber">Licence Number </label>
-                </div>
+        <!-- <div class="modal" id="configureManufacturerModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-primary">Fill Your Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="configureManufacturer.do" method="post" id="configureManufacturerForm">
+                  <div class="form-floating mb-3">
+                    <input type="text" name="companyName" id="companyName" required placeholder="Enter Your Company Name"
+                      class="form-control" />
+                    <label for="companyName">Company Name</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="email" name="companyEmail" id="companyEmail" required placeholder="Enter Company Email"
+                      class="form-control" />
+                    <label for="companyEmail">Company Email</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" name="companyWebsite" id="companyWebsite" placeholder="Company Website Link"
+                      class="form-control" />
+                    <label for="companyWebsite">Website Link(if any)</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" name="licenceNumber" id="licenceNumber" placeholder="Licence Number"
+                      class="form-control" />
+                    <label for="licenceNumber">Licence Number </label>
+                  </div>
 
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
+        </div> -->
+
+        <div class="modal" id="configureManufacturerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content manufacturer-modal-custom">
+                <div class="modal-header manufacturer-header-custom">
+                    <h5 class="modal-title text-primary manufacturer-title-custom">
+                        <span class="manufacturer-title-icon">
+                            <i class="bi bi-lungs"></i>
+                        </span>
+                        Complete Your Profile!
+                    </h5>
+                    
+                    <button
+                        type="button"
+                        class="btn-close manufacturer-close-custom"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ><i class="bi bi-x-lg" style="color: white;font-weight: bold;"></i></button>
+                </div>
+                <div class="modal-body manufacturer-body-custom">
+                    <form action="configureManufacturer.do" method="post" id="configureManufacturerForm">
+                        
+                        <div class="form-floating mb-3 manufacturer-field-group">
+                            <div class="manufacturer-label-wrapper">
+                                <i class="fas fa-building manufacturer-label-icon"></i>
+                                <p class="manufacturer-label-text">
+                                    Company Name<span class="manufacturer-required-star">*</span>
+                                </p>
+                            </div>
+                            <input 
+                                type="text" 
+                                name="companyName" 
+                                id="companyName" 
+                                required 
+                                placeholder="Enter Your Company Name"
+                                class="form-control manufacturer-input-custom" 
+                            />
+                            <div class="manufacturer-helper-text">
+                                <i class="fas fa-info-circle manufacturer-helper-icon"></i>
+                                <span>Enter your official registered company name</span>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3 manufacturer-field-group">
+                            <div class="manufacturer-label-wrapper">
+                                <i class="fas fa-envelope manufacturer-label-icon"></i>
+                                <p class="manufacturer-label-text">
+                                    Company Email<span class="manufacturer-required-star">*</span>
+                                </p>
+                            </div>
+                            <input 
+                                type="email" 
+                                name="companyEmail" 
+                                id="companyEmail" 
+                                required 
+                                placeholder="Enter Company Email"
+                                class="form-control manufacturer-input-custom" 
+                            />
+                            <div class="manufacturer-helper-text">
+                                <i class="fas fa-info-circle manufacturer-helper-icon"></i>
+                                <span>Official email address for business communications</span>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3 manufacturer-field-group">
+                            <div class="manufacturer-label-wrapper">
+                                <i class="fas fa-globe manufacturer-label-icon"></i>
+                                <p class="manufacturer-label-text">
+                                    Website Link
+                                    <span class="manufacturer-optional-badge">Optional</span>
+                                </p>
+                            </div>
+                            <input 
+                                type="text" 
+                                name="companyWebsite" 
+                                id="companyWebsite" 
+                                placeholder="https://www.yourcompany.com"
+                                class="form-control manufacturer-input-custom" 
+                            />
+                            <div class="manufacturer-helper-text">
+                                <i class="fas fa-link manufacturer-helper-icon"></i>
+                                <span>Your company's official website URL</span>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3 manufacturer-field-group">
+                            <div class="manufacturer-label-wrapper">
+                                <i class="fas fa-certificate manufacturer-label-icon"></i>
+                                <p class="manufacturer-label-text">
+                                    Licence Number
+                                    <span class="manufacturer-optional-badge">Optional</span>
+                                </p>
+                            </div>
+                            <input 
+                                type="text" 
+                                name="licenceNumber" 
+                                id="licenceNumber" 
+                                placeholder="Enter your manufacturing licence number"
+                                class="form-control manufacturer-input-custom" 
+                            />
+                            <div class="manufacturer-helper-text">
+                                <i class="fas fa-shield-alt manufacturer-helper-icon"></i>
+                                <span>Your pharmaceutical manufacturing licence number</span>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer manufacturer-footer-custom">
+                            <button type="submit" class="btn btn-primary manufacturer-submit-custom">
+                                <i class="fas fa-check-circle"></i>
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
       <!--------------------------Configure Manufacturer Modal End---------------------------->
 
       <!-- ------------------------Add Medicine Modal Start---------------------------->

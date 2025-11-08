@@ -1,7 +1,17 @@
 window.addEventListener("load" , ()=>{
-    const configureDoctorModalvar = new bootstrap.Modal(configureDoctorModal)
-    configureDoctorModalvar.show()
+    const modalElement = document.getElementById('configureDoctorModal');
+
+    if(modalElement){
+      const configureDoctorModalvar = new bootstrap.Modal(modalElement);
+      configureDoctorModalvar.show()
+      const configureDoctorModalCloseBtn = document.querySelector("#configureDoctorModalCloseBtn")
+      configureDoctorModalCloseBtn.addEventListener("click" , ()=>{
+        configureDoctorModalvar.hide()  
+      })
+    }
 })
+
+
 
 //################# HANDLING NOTIFICATIONS #################################
 

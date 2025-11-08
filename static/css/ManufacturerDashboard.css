@@ -1,226 +1,454 @@
 nav {
-    background-color: rgb(45, 109, 131);
-    font-weight: 500;
-    /* color: white !important; */
+  background-color: rgb(45, 109, 131);
+  font-weight: 500;
+  /* color: white !important; */
 }
 
 .welcomeSectionDiv img {
-    width: 180px;
-    margin-right: 50px;
+  width: 180px;
+  margin-right: 50px;
 }
 
 .welcomeSectionBtn {
-    background-color: rgb(45, 109, 131);
-    color: white;
+  background-color: rgb(45, 109, 131);
+  color: white;
 }
 
 .welcomeSectionBtn:hover {
-    background-color: rgb(37, 89, 107);
-    color: white;
+  background-color: rgb(37, 89, 107);
+  color: white;
 }
 
 .alert-info {
-    background-color: rgb(45, 109, 131);
-    color: white;
+  background-color: rgb(45, 109, 131);
+  color: white;
 }
 
 .btn-close {
-    color: red;
+  color: red;
+}
+
+:root {
+  --primary-teal: rgb(45, 109, 131);
+  --light-teal: rgba(45, 109, 131, 0.1);
+  --dark-teal: rgb(32, 85, 103);
+}
+
+.manufacturer-modal-custom {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.manufacturer-header-custom {
+  background: linear-gradient(
+    135deg,
+    var(--primary-teal) 0%,
+    var(--dark-teal) 100%
+  );
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.manufacturer-header-custom::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.manufacturer-header-custom::after {
+  content: "";
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.manufacturer-title-custom {
+  color: white !important;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.manufacturer-title-icon {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+}
+
+.manufacturer-close-custom {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.manufacturer-close-custom:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.manufacturer-body-custom {
+  padding: 2rem;
+  background: white;
+}
+
+.manufacturer-field-group {
+  margin-bottom: 1.5rem;
+}
+
+.manufacturer-label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.manufacturer-label-icon {
+  color: var(--primary-teal);
+  font-size: 1rem;
+}
+
+.manufacturer-label-text {
+  font-weight: 600;
+  color: var(--dark-teal);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.manufacturer-required-star {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.manufacturer-optional-badge {
+  background: var(--light-teal);
+  color: var(--primary-teal);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.manufacturer-input-custom {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background: #fafbfc;
+}
+
+.manufacturer-input-custom:focus {
+  outline: none;
+  border-color: var(--primary-teal);
+  background: white;
+  box-shadow: 0 0 0 3px var(--light-teal);
+}
+
+.manufacturer-input-custom::placeholder {
+  color: #9ca3af;
+}
+
+.manufacturer-helper-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 0.4rem;
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+.manufacturer-helper-icon {
+  color: var(--primary-teal);
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.manufacturer-footer-custom {
+  padding: 0 2rem 2rem;
+  background: white;
+}
+
+.manufacturer-submit-custom {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary-teal) 0%,
+    var(--dark-teal) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(45, 109, 131, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.manufacturer-submit-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 109, 131, 0.35);
+}
+
+.manufacturer-submit-custom:active {
+  transform: translateY(0);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.manufacturer-modal-custom {
+  animation: slideIn 0.3s ease;
 }
 
 .notification-panel {
-    max-height: 300px;
-    /* Fixed height */
-    overflow-y: auto;
-    /* Vertical scroll only */
-    overflow-x: hidden;
-    /* Prevent horizontal scroll */
-    padding-right: 10px;
-    /* Room for scrollbar */
+  max-height: 300px;
+  /* Fixed height */
+  overflow-y: auto;
+  /* Vertical scroll only */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  padding-right: 10px;
+  /* Room for scrollbar */
 }
 
 .notification {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 8px;
-    /* less bubble-like */
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 8px;
+  /* less bubble-like */
 }
 
 .addMedicineBtn {
-    background-color: rgb(45, 109, 131);
-    color: white;
-    width: 200px;
+  background-color: rgb(45, 109, 131);
+  color: white;
+  width: 200px;
 }
 
 .addMedicineBtn:hover {
-    background-color: rgb(37, 89, 107);
-    color: white;
+  background-color: rgb(37, 89, 107);
+  color: white;
 }
 
 #addMedicineModal .modal-content {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
 
-        #addMedicineModal .modal-header {
-            background: linear-gradient(135deg, rgb(45, 109, 131) 0%, rgb(58, 141, 169) 100%);
-            color: white;
-            padding: 1.25rem 1.5rem;
-            border-bottom: none;
-        }
+#addMedicineModal .modal-header {
+  background: linear-gradient(
+    135deg,
+    rgb(45, 109, 131) 0%,
+    rgb(58, 141, 169) 100%
+  );
+  color: white;
+  padding: 1.25rem 1.5rem;
+  border-bottom: none;
+}
 
-        #addMedicineModal .modal-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+#addMedicineModal .modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-        #addMedicineModal .modal-body {
-            padding: 1.5rem;
-        }
+#addMedicineModal .modal-body {
+  padding: 1.5rem;
+}
 
-        #addMedicineModal .modal-footer {
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-            padding: 1rem 1.5rem;
-        }
+#addMedicineModal .modal-footer {
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  padding: 1rem 1.5rem;
+}
 
-        /* Form Floating Enhancements */
-        #addMedicineModal .form-floating .form-control,
-        #addMedicineModal .form-floating .form-select {
-            border: 1px solid #d0d0d0;
-            border-radius: 6px;
-            padding-left: 2.5rem;
-        }
+/* Form Floating Enhancements */
+#addMedicineModal .form-floating .form-control,
+#addMedicineModal .form-floating .form-select {
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  padding-left: 2.5rem;
+}
 
-        #addMedicineModal .form-floating .form-control:focus,
-        #addMedicineModal .form-floating .form-select:focus {
-            border-color: rgb(45, 109, 131);
-            box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
-        }
+#addMedicineModal .form-floating .form-control:focus,
+#addMedicineModal .form-floating .form-select:focus {
+  border-color: rgb(45, 109, 131);
+  box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
+}
 
-        #addMedicineModal .form-floating > label {
-            padding-left: 2.5rem;
-            color: #6c757d;
-        }
+#addMedicineModal .form-floating > label {
+  padding-left: 2.5rem;
+  color: #6c757d;
+}
 
-        #addMedicineModal .form-floating .form-control:focus ~ label,
-        #addMedicineModal .form-floating .form-control:not(:placeholder-shown) ~ label,
-        #addMedicineModal .form-floating .form-select:focus ~ label {
-            color: rgb(45, 109, 131);
-        }
+#addMedicineModal .form-floating .form-control:focus ~ label,
+#addMedicineModal .form-floating .form-control:not(:placeholder-shown) ~ label,
+#addMedicineModal .form-floating .form-select:focus ~ label {
+  color: rgb(45, 109, 131);
+}
 
-        /* addMedicineDiv Styling */
-        .addMedicineDiv {
-            position: relative;
-        }
+/* addMedicineDiv Styling */
+.addMedicineDiv {
+  position: relative;
+}
 
-        /* addDenominationDiv Styling */
-        .addDenominationDiv {
-            background: linear-gradient(135deg, rgba(45, 109, 131, 0.05) 0%, rgba(58, 141, 169, 0.05) 100%);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 2px solid rgba(45, 109, 131, 0.2);
-        }
+/* addDenominationDiv Styling */
+.addDenominationDiv {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 109, 131, 0.05) 0%,
+    rgba(58, 141, 169, 0.05) 100%
+  );
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid rgba(45, 109, 131, 0.2);
+}
 
-        .addDenominationDiv .form-label {
-            color: rgb(45, 109, 131);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+.addDenominationDiv .form-label {
+  color: rgb(45, 109, 131);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-        .addDenominationDiv .form-control {
-            border: 1px solid #d0d0d0;
-            border-radius: 6px;
-        }
+.addDenominationDiv .form-control {
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+}
 
-        .addDenominationDiv .form-control:focus {
-            border-color: rgb(45, 109, 131);
-            box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
-        }
+.addDenominationDiv .form-control:focus {
+  border-color: rgb(45, 109, 131);
+  box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
+}
 
-        /* Button Styling */
-        #addMedicineModal .btn-primary,
-        #addMedicineSubmitBtn,
-        #generateInputForDenomination,
-        #addMedicineFormatSubmitBtn {
-            background: linear-gradient(135deg, rgb(45, 109, 131) 0%, rgb(58, 141, 169) 100%);
-            color: white;
-            border: none;
-            padding: 0.625rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+/* Button Styling */
+#addMedicineModal .btn-primary,
+#addMedicineSubmitBtn,
+#generateInputForDenomination,
+#addMedicineFormatSubmitBtn {
+  background: linear-gradient(
+    135deg,
+    rgb(45, 109, 131) 0%,
+    rgb(58, 141, 169) 100%
+  );
+  color: white;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-        #addMedicineModal .btn-primary:hover,
-        #addMedicineSubmitBtn:hover,
-        #generateInputForDenomination:hover,
-        #addMedicineFormatSubmitBtn:hover {
-            background: linear-gradient(135deg, rgb(35, 89, 111) 0%, rgb(45, 109, 131) 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(45, 109, 131, 0.3);
-        }
+#addMedicineModal .btn-primary:hover,
+#addMedicineSubmitBtn:hover,
+#generateInputForDenomination:hover,
+#addMedicineFormatSubmitBtn:hover {
+  background: linear-gradient(
+    135deg,
+    rgb(35, 89, 111) 0%,
+    rgb(45, 109, 131) 100%
+  );
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 109, 131, 0.3);
+}
 
-        #addMedicineModal .btn-secondary {
-            background: #6c757d;
-            border: none;
-            padding: 0.625rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+#addMedicineModal .btn-secondary {
+  background: #6c757d;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-        #addMedicineModal .btn-secondary:hover {
-            background: #5a6268;
-        }
+#addMedicineModal .btn-secondary:hover {
+  background: #5a6268;
+}
 
-        /* denominationContainer Styling - Clean and Simple */
-        #denominationContainer {
-            margin-top: 1.5rem;
-            display: grid;
-            gap: 1rem;
-        }
+/* denominationContainer Styling - Clean and Simple */
+#denominationContainer {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
 
-        /* Style for dynamically created form-floating divs */
- 
+/* Style for dynamically created form-floating divs */
 
-        /* APPROACH 2: Minimal wrapper classes for icons only */
-        
-        .icon-wrapper {
-            position: relative;
-        }
+/* APPROACH 2: Minimal wrapper classes for icons only */
 
-        .field-icon {
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgb(45, 109, 131);
-            font-size: 1rem;
-            z-index: 10;
-            pointer-events: none;
-        }
+.icon-wrapper {
+  position: relative;
+}
 
-        /* Section Title */
-        .section-title {
-            color: rgb(45, 109, 131);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgb(45, 109, 131);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+.field-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(45, 109, 131);
+  font-size: 1rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Section Title */
+.section-title {
+  color: rgb(45, 109, 131);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgb(45, 109, 131);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

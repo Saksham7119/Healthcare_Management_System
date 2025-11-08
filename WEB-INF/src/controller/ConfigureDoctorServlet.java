@@ -31,6 +31,6 @@ public class ConfigureDoctorServlet extends HttpServlet{
             session.setAttribute("doctorDetailsAddedTrue", doctor);
         }
 
-        request.getRequestDispatcher("doctorHomePage.jsp").forward(request, response);
+        response.sendRedirect("doctorHomePage.do");;
     }
 }
