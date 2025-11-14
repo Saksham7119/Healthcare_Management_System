@@ -200,7 +200,7 @@
       <!---Show Schedule Start-->
        <div class="schedule-container mainScheduleShowTable noDisplay">
         <div class="schedule-header">
-            <h2>📅 Clinic Schedule</h2>
+            <h2>Clinic Schedule</h2>
             <p>Daily Appointment Slots</p>
         </div>
         
@@ -221,8 +221,8 @@
         </div>
         
         <div class="button-container">
-            <button class="delete-btn">🗑️ Delete Selected</button>
-            <button class="close-btn">✖️ Close</button>
+            <button class="delete-btn">Delete Selected</button>
+            <button class="close-btn"> Close</button>
         </div>
     </div>
       <!---Show Schedule End-->

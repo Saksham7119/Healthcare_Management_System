@@ -353,7 +353,7 @@ window.addEventListener("DOMContentLoaded", function () {
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
-          const scheduleTBodyParent = document.getElementsByClassName("scheduleTBodyParent")
+          const scheduleTBodyParent = document.querySelector(".scheduleTBodyParent")
           mainScheduleShowTable.classList.remove("noDisplay")
           
           let cardHTMLs = []
@@ -371,13 +371,13 @@ window.addEventListener("DOMContentLoaded", function () {
                         <td class="serial-number">${i}</td>
                         <td>
                             <div class="time-cell">
-                                <span class="time-icon">🕐</span>
+                                <span class="time-icon"></span>
                                 <span>${startTime}</span>
                             </div>
                         </td>
                         <td>
                             <div class="time-cell">
-                                <span class="time-icon">🕐</span>
+                                <span class="time-icon"></span>
                                 <span>${endTime}</span>
                             </div>
                         </td>
