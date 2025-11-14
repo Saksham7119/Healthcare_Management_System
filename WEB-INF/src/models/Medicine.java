@@ -16,6 +16,8 @@ public class Medicine {
     private Boolean veg;
     private String sideEffect;
     private Manufacturer manufacturer;
+    private MedicineComposition medicineComposition;
+    private ArrayList<MedicineFormat> medicineFormats;
 
     public Medicine() {}
     public Medicine(Integer medicineId) {
@@ -108,6 +110,61 @@ public class Medicine {
         return medicine;
     }
 
+    public static ArrayList<Medicine> collectMedicines(){
+        ArrayList<Medicine> arrayListMedicine = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from medicines";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Medicine medicine = new Medicine(rs.getInt("medicine_id"),rs.getString("name"),rs.getString("description"),rs.getBoolean("veg"),rs.getString("side_effect"));
+                
+                medicine.setMedicineComposition(MedicineComposition.collectCompositionsByMedicineId(rs.getInt("medicine_id")));
+                medicine.setMedicineFormats(MedicineFormat.collectAllFormats(rs.getInt("medicine_id")));
+
+                arrayListMedicine.add(medicine);
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListMedicine;
+    }
+    
+    public static ArrayList<Medicine> collectMedicinesByManufacturerId(int manufacturerId){
+        ArrayList<Medicine> arrayListMedicine = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from medicines where manufacturer_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1 , manufacturerId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+
+                Manufacturer manufacturer = new Manufacturer(rs.getInt("manufacturer_id"));
+                Medicine medicine = new Medicine(rs.getInt("medicine_id"),rs.getString("name"),rs.getString("description"),rs.getBoolean("veg"),rs.getString("side_effect"),manufacturer);
+                
+                medicine.setMedicineComposition(MedicineComposition.collectCompositionsByMedicineId(rs.getInt("medicine_id")));
+                medicine.setMedicineFormats(MedicineFormat.collectAllFormats(rs.getInt("medicine_id")));
+
+                arrayListMedicine.add(medicine);
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListMedicine;
+    }
+
     public boolean deleteMedicine(int medicineId) {
     boolean flag = false;
     try {
@@ -174,6 +231,18 @@ public class Medicine {
 
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
+    }
+    public MedicineComposition getMedicineComposition() {
+        return medicineComposition;
+    }
+    public void setMedicineComposition(MedicineComposition medicineComposition) {
+        this.medicineComposition = medicineComposition;
+    }
+    public ArrayList<MedicineFormat> getMedicineFormats() {
+        return medicineFormats;
+    }
+    public void setMedicineFormats(ArrayList<MedicineFormat> medicineFormats) {
+        this.medicineFormats = medicineFormats;
     }
     
 }

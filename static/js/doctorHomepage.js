@@ -4,12 +4,20 @@ window.addEventListener("load" , ()=>{
     if(modalElement){
       const configureDoctorModalvar = new bootstrap.Modal(modalElement);
       configureDoctorModalvar.show()
+      
       const configureDoctorModalCloseBtn = document.querySelector("#configureDoctorModalCloseBtn")
-      configureDoctorModalCloseBtn.addEventListener("click" , ()=>{
-        configureDoctorModalvar.hide()  
-      })
-    }
-})
+      
+      // **ADD THIS NULL CHECK** to prevent the error
+    //   if (configureDoctorModalCloseBtn) { 
+    //       configureDoctorModalCloseBtn.addEventListener("click" , ()=>{
+    //         configureDoctorModalvar.hide()  
+    //       })
+    //   } else {
+    //       // Optional: Log an error to help with debugging the HTML
+    //       console.error("Error: Could not find the close button with ID #configureDoctorModalCloseBtn"); 
+    //   }
+    // }
+}})
 
 
 
@@ -38,7 +46,7 @@ window.addEventListener("DOMContentLoaded", function () {
           )
         }
       } else {
-        notificationPanel.innerHTML.insertAdjacentHTML(
+        notificationPanel.insertAdjacentHTML(
             "afterbegin" ,
             '<div class="alert alert-info d-flex justify-content-between align-items-center rounded-pill px-4" role="alert">' +
             "<span>There is no notifications to show...</span>" +

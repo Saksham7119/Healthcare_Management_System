@@ -190,8 +190,16 @@ nav {
   width: 180px;
   margin-right: 50px;
 }
+.welcome-section {
+  background: linear-gradient(135deg, rgb(180, 111, 180), rgb(180, 111, 180));
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(45, 109, 131, 0.05);
+}
 .welcomeSectionBtn {
-  background-color: rgb(121, 73, 150);
+  background-color: rgb(96, 57, 119);
   color: white;
 }
 .welcomeSectionBtn:hover {
@@ -202,25 +210,22 @@ nav {
   background-color: rgb(121, 73, 150);
   color: white;
 }
-/* .notificationTextBox{
-    background-color: rgb(103, 29, 146);
-    color: white;
-}    */
 
 .btn-close {
   color: red;
 }
 .notification-panel {
-  max-height: 300px; /* Fixed height */
-  overflow-y: auto; /* Vertical scroll only */
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  padding-right: 10px; /* Room for scrollbar */
+  max-height: 300px; 
+  overflow-y: auto;
+  overflow-x: hidden; 
+  padding-right: 10px; 
 }
 .notification {
   padding: 8px 16px;
   font-size: 14px;
-  border-radius: 8px; /* less bubble-like */
+  border-radius: 8px; 
 }
+
 /* h3 {
       font-weight: 500;
       border-bottom: 3px solid black;

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import utils.DBManager;
+
 public class GenericMedicine {
 
     private Integer genericMedicineId;
@@ -21,6 +23,9 @@ public class GenericMedicine {
         this.name = name;
     }
 
+    public GenericMedicine(String name) {
+        this.name = name;
+    }
     //------------------------JDBC START------------------------------------
 
     public static ArrayList<GenericMedicine> getAllGenericMedicines(){
@@ -45,6 +50,28 @@ public class GenericMedicine {
         }
 
         return genericMedicine;
+    }
+
+    public GenericMedicine getGenericMedicineById(int genericMedicineId){
+        GenericMedicine gm = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM generic_medicines where generic_medicine_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, genericMedicineId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                gm = new GenericMedicine(rs.getString("name"));
+            }
+
+            con.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return gm;
     }
     //------------------------JDBC END------------------------------------
 

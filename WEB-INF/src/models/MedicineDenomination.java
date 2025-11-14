@@ -17,6 +17,7 @@ public class MedicineDenomination {
     private MedicineFormat medicineFormat;
     private Integer denomination;
     private MedicineUnit medicineUnit;
+    private MedicineDenominationImage medicineDenominationImage;
 
     public MedicineDenomination() {}
     public MedicineDenomination(MedicineFormat medicineFormat , Integer denomination , MedicineUnit medicineUnit) {
@@ -24,10 +25,11 @@ public class MedicineDenomination {
         this.denomination = denomination;
         this.medicineUnit = medicineUnit;
     }
-    public MedicineDenomination( Integer denomination , MedicineFormat medicineFormat ,MedicineUnit medicineUnit) {
-        this.medicineFormat = medicineFormat;
+    public MedicineDenomination(Integer medicineDenominationId ,Integer denomination ,MedicineUnit medicineUnit, MedicineDenominationImage medicineDenominationImage) {
+        this.medicineDenominationId = medicineDenominationId;
         this.denomination = denomination;
         this.medicineUnit = medicineUnit;
+        this.medicineDenominationImage = medicineDenominationImage;
     }
     public MedicineDenomination(Integer medicineDenominationId, Integer denomination) {
         this.medicineDenominationId = medicineDenominationId;
@@ -41,6 +43,20 @@ public class MedicineDenomination {
         this.denomination = denomination;
         this.medicineUnit = medicineUnit;
     }
+
+    public MedicineDenomination(Integer denomination, MedicineFormat medicineFormat,
+            MedicineUnit medicineUnit) {
+        this.denomination = denomination;
+        this.medicineFormat = medicineFormat;
+        this.medicineUnit = medicineUnit;
+    }
+
+    public MedicineDenomination(Integer medicineDenominationId, Integer denomination, MedicineUnit medicineUnit) {
+        this.medicineDenominationId = medicineDenominationId;
+        this.denomination = denomination;
+        this.medicineUnit = medicineUnit;
+    }
+    
     
     //--------------------------------------------------------------------------
     
@@ -125,6 +141,8 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
     return medicineDenomination;
 }
 
+
+
   public MedicineDenomination getDenominationNameById(int denominationId){
       MedicineDenomination medicineDenom = new MedicineDenomination();
 
@@ -137,6 +155,35 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
 
             while(rs.next()){
                 medicineDenom.setDenomination(denomination);
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return medicineDenom;
+    }
+
+  public MedicineDenomination collectAllDenominationByFormatId(int medicineFormatId){
+      MedicineDenomination medicineDenom = null;
+
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from medicine_denominations where medicine_format_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1 , medicineFormatId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                MedicineUnit unit = null;
+                unit = new MedicineUnit().getUnitNameById(rs.getInt("medicine_unit_id"));
+
+                MedicineDenominationImage medicineDenominationImage = null;
+                medicineDenominationImage = new MedicineDenominationImage().getDenominationImageByDenominationId(rs.getInt("medicine_denomination_id"));
+                System.out.println(medicineDenominationImage);
+                medicineDenom = new MedicineDenomination(rs.getInt("medicine_denomination_id") , rs.getInt("denomination") , unit , medicineDenominationImage);
             }
 
             con.close();
@@ -229,5 +276,11 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
 
     public void setDenomination(Integer denomination) {
         this.denomination = denomination;
+    }
+    public MedicineDenominationImage getMedicineDenominationImage() {
+        return medicineDenominationImage;
+    }
+    public void setMedicineDenominationImage(MedicineDenominationImage medicineDenominationImage) {
+        this.medicineDenominationImage = medicineDenominationImage;
     }
 }

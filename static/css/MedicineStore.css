@@ -71,21 +71,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* .medicineCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(45, 109, 131, 0.15) !important;
-} */
-
-/* .medicineCard .card-img-top {
-  padding: 1.5rem !important;
-  height: 180px;
-  object-fit: contain;
-  background: linear-gradient(
-    135deg,
-    rgba(45, 109, 131, 0.05) 0%,
-    rgba(58, 141, 169, 0.05) 100%
-  );
-} */
 
 .medicineCard .card-body {
   padding: 1.25rem !important;
@@ -147,6 +132,18 @@ body {
   box-shadow: 0 4px 8px rgba(45, 109, 131, 0.2);
 }
 
+.medicineImageEditBtn {
+  background-color: rgb(45, 109, 131) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.medicineImageEditBtn:hover {
+  background-color: rgb(35, 89, 111) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(45, 109, 131, 0.2);
+}
+
 .medicineCardRemoveBtn {
   background-color: #dc3545 !important;
   color: white !important;
@@ -163,7 +160,6 @@ body {
   height: 300px;
 }
 
-/* Footer Spacing */
 footer {
   background-color: rgb(45, 109, 131);
   color: white;
@@ -176,7 +172,6 @@ footer .container-fluid {
   padding: 0 3rem;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 1400px) {
   .medicineCardParentDiv {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -229,7 +224,6 @@ footer .container-fluid {
   }
 }
 
-/* Confirmation Modal Styling */
 #confirmingMedicineRemovalModal .modal-content {
   border-radius: 12px;
   border: none;
@@ -318,7 +312,6 @@ footer .container-fluid {
   background: white;
 }
 
-/* Form Styling */
 #editMedicineImagebox {
   width: 100%;
 }
@@ -327,7 +320,6 @@ footer .container-fluid {
   padding: 0;
 }
 
-/* Field Box */
 .field_box {
   margin-bottom: 1.5rem;
 }
@@ -373,7 +365,6 @@ footer .container-fluid {
   box-shadow: 0 0 0 3px rgba(45, 109, 131, 0.1);
 }
 
-/* Custom File Input Button */
 .field_box input[type="file"]::file-selector-button {
   padding: 0.5rem 1.25rem;
   border: none;
@@ -432,7 +423,6 @@ footer .container-fluid {
   transform: translateY(0);
 }
 
-/* Info Box */
 .info-box {
   background: linear-gradient(
     135deg,

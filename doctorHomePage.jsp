@@ -21,8 +21,8 @@
     />
   </head>
   <body>
-     <c:if  test = "${empty user}">
-      <c:redirect url="login.jsp"/>
+    <c:if test="${empty user}">
+      <c:redirect url="login.jsp" />
     </c:if>
 
     <!--Header Start-->
@@ -58,12 +58,12 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="#">Appointments</a>
             </li>
-          
-          <li class="nav-item">
-            <a class="nav-link text-white" href="doctorDashboard.do"
-              >Dashboard</a
-            >
-          </li>
+
+            <li class="nav-item">
+              <a class="nav-link text-white" href="doctorDashboard.do"
+                >Dashboard</a
+              >
+            </li>
 
             <li class="nav-item dropdown">
               <a
@@ -77,7 +77,9 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#">Configure Profile</a>
+                  <a class="dropdown-item" href="ConfigureDoctorProfile.do"
+                    >Configure Profile</a
+                  >
                 </li>
                 <li>
                   <a class="dropdown-item">Logout</a>
@@ -91,16 +93,21 @@
     <!--Header End-->
 
     <!--Welcome Section Start-->
-    <div class="mx-5 mt-3 mb-3 welcomeSectionDiv d-flex justify-content-between">
+    <div
+      class="mx-5 mt-3 mb-3 welcomeSectionDiv d-flex justify-content-between welcome-section"
+    >
       <div>
         <h3 class="">Welcome, ${sessionScope.userName}</h3>
         <h5>Doctor Specialization</h5>
         <h6>Years Of Expirience</h6>
         <h6>Consultation Charge : 000</h6>
-        <button type="button" class="btn welcomeSectionBtn">
+        <button type="button" class="btn welcomeSectionBtn"><i class="bi bi-cloud-plus"></i>
           Add Appointment
         </button>
-        <button type="button" class="btn welcomeSectionBtn ms-3">
+        <button type="button" class="btn welcomeSectionBtn ms-3"><i class="bi bi-shop"></i><a href="MedicineMarketDoctor.do" style="color: white;text-decoration: none;">
+          Medicine Market</a>
+        </button>
+        <button type="button" class="btn welcomeSectionBtn ms-3"><i class="bi bi-calendar-date"></i>
           Set Schedule
         </button>
       </div>
@@ -110,14 +117,14 @@
     </div>
     <!--Welcome Section End-->
 
-      <!--Notification Section Start-->
-      <div class="mb-5 mx-5">
-        <h4 class="mb-3 border-bottom pb-2">Notifications</h4>
+    <!--Notification Section Start-->
+    <div class="mb-5 mx-5">
+      <h4 class="mb-3 border-bottom pb-2">Notifications</h4>
 
-        <div class="notification-panel" id="notification-panel"></div>
-      </div>
+      <div class="notification-panel" id="notification-panel"></div>
+    </div>
 
-      <!--Notification Section End-->
+    <!--Notification Section End-->
 
     <!--Upcomining Appointment Starts-->
     <div class="mb-5 mx-5">
@@ -167,7 +174,7 @@
         </div>
 
         <!-- Another Card -->
-             <div class="appointment-card mb-3">
+        <div class="appointment-card mb-3">
           <div class="row align-items-center">
             <div class="col-auto">
               <img src="static/media/images/user.png" alt="patient" />
@@ -192,13 +199,15 @@
               <button class="btn-custom">Request To Reschedule</button>
             </div>
             <div>
-              <span class="status-badge status-attended">Status : Attended</span>
+              <span class="status-badge status-attended"
+                >Status : Attended</span
+              >
             </div>
           </div>
         </div>
 
         <!-- Another Card -->
-             <div class="appointment-card mb-3">
+        <div class="appointment-card mb-3">
           <div class="row align-items-center">
             <div class="col-auto">
               <img src="static/media/images/user.png" alt="patient" />
@@ -223,12 +232,14 @@
               <button class="btn-custom">Request To Reschedule</button>
             </div>
             <div>
-              <span class="status-badge status-cancelled">Status : Cancelled</span>
+              <span class="status-badge status-cancelled"
+                >Status : Cancelled</span
+              >
             </div>
           </div>
         </div>
         <!-- Another Card -->
-             <div class="appointment-card mb-3">
+        <div class="appointment-card mb-3">
           <div class="row align-items-center">
             <div class="col-auto">
               <img src="static/media/images/user.png" alt="patient" />
@@ -253,12 +264,14 @@
               <button class="btn-custom">Request To Reschedule</button>
             </div>
             <div>
-              <span class="status-badge status-rescheduled">Status : Rescheduled</span>
+              <span class="status-badge status-rescheduled"
+                >Status : Rescheduled</span
+              >
             </div>
           </div>
         </div>
         <!-- Another Card -->
-             <div class="appointment-card mb-3">
+        <div class="appointment-card mb-3">
           <div class="row align-items-center">
             <div class="col-auto">
               <img src="static/media/images/user.png" alt="patient" />
@@ -291,7 +304,7 @@
     </div>
     <!--Upcomining Appointment End-->
 
-        <!--------------------Footer Start--------------------------------------->
+    <!--------------------Footer Start--------------------------------------->
     <footer class="text-white py-4" style="background-color: rgb(121, 73, 150)">
       <div class="container">
         <div class="row">
@@ -337,50 +350,9 @@
     </footer>
     <!--Footer end-->
 
-        <!--------------------------Configure Doctor Modal Start---------------------------->
+    <!--------------------------Configure Doctor Modal Start---------------------------->
+
     <!-- <div class="modal" id="configureDoctorModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-primary">Fill Your Details, Doctor!</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form
-              action="configureDoctor.do"
-              method="post"
-              id="configureDoctorForm"
-            >
-              <div class="form-floating mb-3">
-                <input
-                  type="date"
-                  name="practiceStartDate"
-                  id="practiceStartDate"
-                  required
-                  placeholder="Start Date of your Practice ?"
-                  class="form-control"
-                />
-                <label for="practiceStartDate ">Practice Start Date</label>
-              </div>
-              <div class="form-floating mb-3">
-                <textarea name="aboutDoctor" id="aboutDoctor" rows="5" cols="60" placeholder="About Me?"></textarea>
-              </div>
-    
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div> -->
-<c:if test="${empty doctorDetailsAddedTrue}">
-    <div class="modal" id="configureDoctorModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -441,8 +413,47 @@
                 </div>
             </div>
         </div>
+      </div> -->
+
+    <div
+      class="modal fade"
+      id="configureDoctorModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">
+              Complete Your Profile!
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h5>For performing actions on this website , you need to complete your profile... Or else you will not be able to make changes!</h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Skip for now
+            </button>
+            <button type="button" class="btn btn-primary" style="background-color: rgb(121, 73, 150);"><a href="ConfigureDoctorProfile.do" style="text-decoration: none;color: white;border:1px solid rgb(121, 73, 150);">Complete Now</a></button>
+          </div>
+        </div>
       </div>
-    </c:if>
+    </div>
+
     <!--------------------------Configure Manufacturer Modal End---------------------------->
 
     <!--------------------------Scripting Section Starts Here---------------------------->

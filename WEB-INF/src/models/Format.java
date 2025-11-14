@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import utils.DBManager;
+
 public class Format {
 
     private Integer formatId;
@@ -49,6 +51,30 @@ public class Format {
         return format;
     }
 
+     public Format getFormatByFormatId(int formatId) {
+        Format format = null;
+
+        try {
+            Connection con = DBManager.getConnection();
+
+            String query = "SELECT format_id , name FROM formats where format_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, formatId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                format = new Format(rs.getInt("format_id") , rs.getString("name"));
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return format;
+    }
+
+    
     
     public Integer getFormatId() {
         return formatId;

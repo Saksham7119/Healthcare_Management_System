@@ -26,9 +26,15 @@ public class Manufacturer {
         this.user = user;
     }
 
+    public Manufacturer(Integer manufacturerId) {
+        this.manufacturerId = manufacturerId;
+    }
+    
+
     //Constructors END ---------------
     
     
+
     //--------------JDBC START ---------------
     public boolean fillDetails(){
         boolean flag = false;

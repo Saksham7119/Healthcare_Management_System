@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import utils.DBManager;
+
 public class MedicineUnit {
 
     private Integer medicineUnitId;
@@ -46,6 +48,27 @@ public class MedicineUnit {
         }
 
         return units;
+    }
+
+    public MedicineUnit getUnitNameById(int unitId){
+        MedicineUnit md = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM medicine_units where medicine_unit_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, unitId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                md = new MedicineUnit(rs.getString("unit"));
+            }
+
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return md;
     }
 
     public Integer getMedicineUnitId() {

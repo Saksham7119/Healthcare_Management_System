@@ -1,14 +1,79 @@
 package models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Time;
+import java.util.ArrayList;
+
+import utils.DBManager;
+
 public class Schedule {
 
     private Integer scheduleId;
-    private String startTime;
-    private String endTime;
+    private Time startTime;
+    private Time endTime;
     private Integer patientLimit;
     private Clinic clinic;
+    private Integer clinicId;
 
     public Schedule() {}
+
+    public Schedule(Time startTime, Time endTime, Integer patientLimit, Integer clinicId) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.patientLimit = patientLimit;
+        this.clinicId = clinicId;
+    }
+
+    public Schedule(Integer scheduleId, Time startTime, Time endTime, Integer patientLimit) {
+        this.scheduleId = scheduleId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.patientLimit = patientLimit;
+    }
+
+    public Boolean setClinicSchedule(){
+        Boolean flag = false;
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO schedules (start_time , end_time , patient_limit, clinic_id) VALUES (?,?,?,?)");
+            ps.setTime(1, startTime);
+            ps.setTime(2, endTime);
+            ps.setInt(3, patientLimit);
+            ps.setInt(4 , clinicId);
+
+            int i = ps.executeUpdate();
+            if(i>0) flag = true;
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return flag;
+    }
+
+    public static ArrayList<Schedule> collectSchedules(int clinicId){
+        ArrayList<Schedule> arrayListSchedule = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM schedules WHERE clinic_id=?");
+            ps.setInt(1, clinicId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                arrayListSchedule.add(
+                    new Schedule(rs.getInt("schedule_id") , rs.getTime("start_time"), rs.getTime("end_time"), rs.getInt("patient_limit"))
+                );
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return arrayListSchedule;
+    }
 
     public Integer getScheduleId() {
         return scheduleId;
@@ -18,20 +83,30 @@ public class Schedule {
         this.scheduleId = scheduleId;
     }
 
-    public String getStartTime() {
+    
+
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getClinicId() {
+        return clinicId;
+    }
+
+    public void setClinicId(Integer clinicId) {
+        this.clinicId = clinicId;
     }
 
     public Integer getPatientLimit() {

@@ -6,8 +6,10 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import models.Day;
+import models.Degree;
 import models.GenericMedicine;
 import models.MedicineUnit;
+import models.Specialization;
 import utils.DBManager;
 // import utils.SMSGatewayManager;
 
@@ -59,7 +61,12 @@ public class AppListener implements ServletContextListener {
 
         System.out.println("------Load Days------");
         context.setAttribute("days" , Day.getDays());
-        System.out.println(Day.getDays());
+
+        System.out.println("-------Load Specializations------");
+        context.setAttribute("specializations", Specialization.getAllSpecializations());
+
+        System.out.println("-------Load Degrees------");
+        context.setAttribute("degrees", Degree.getAllDegrees());
     }
 
     public void contextDestroyed(ServletContextEvent ev) {

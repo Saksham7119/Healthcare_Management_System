@@ -16,6 +16,8 @@ public class MedicineFormat {
     private Integer medicineFormatId;
     private Medicine medicine;
     private Format format;
+    private Integer medicineId;
+    private MedicineDenomination medicineDenomination;
 
     public MedicineFormat() {}
     public MedicineFormat(Medicine medicine , Format format) {
@@ -28,6 +30,12 @@ public class MedicineFormat {
         this.format = format;
     }
 
+    public MedicineFormat(Integer medicineFormatId, Format format, Integer medicineId, MedicineDenomination medicineDenomination) {
+        this.medicineFormatId = medicineFormatId;
+        this.format = format;
+        this.medicineId = medicineId;
+        this.medicineDenomination = medicineDenomination;
+    }
     public boolean SaveMedicineFormat() {
         boolean saved = false;
         PreparedStatement pst = null;
@@ -98,6 +106,43 @@ public ArrayList<MedicineFormat> collectFormats(List<Integer> medicineIds){
     return medicineFormat;
 }
 
+public static ArrayList<MedicineFormat> collectAllFormats(int medicineId){
+    ArrayList<MedicineFormat> medicineFormat = new ArrayList<>();
+
+    try {
+        Connection con = DBManager.getConnection();            
+        String query = "select * from medicine_formats where medicine_id=?";
+        
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, medicineId);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int fetchedMedicineId = rs.getInt("medicine_id");
+
+            Format format = null;
+            format = new Format().getFormatByFormatId(rs.getInt("format_id"));
+
+            MedicineDenomination medicineDenomination = null;
+            medicineDenomination = new MedicineDenomination().collectAllDenominationByFormatId(rs.getInt("medicine_format_id"));
+            medicineFormat.add(
+                new MedicineFormat(
+                    rs.getInt("medicine_format_id"),
+                    format,
+                    fetchedMedicineId,
+                    medicineDenomination
+                )
+            );
+        }
+
+        con.close();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return medicineFormat;
+}
+
     public Integer getMedicineFormatId() {
         return medicineFormatId;
     }
@@ -121,4 +166,17 @@ public ArrayList<MedicineFormat> collectFormats(List<Integer> medicineIds){
     public void setFormat(Format format) {
         this.format = format;
     }
+    public Integer getMedicineId() {
+        return medicineId;
+    }
+    public void setMedicineId(Integer medicineId) {
+        this.medicineId = medicineId;
+    }
+    public MedicineDenomination getMedicineDenomination() {
+        return medicineDenomination;
+    }
+    public void setMedicineDenomination(MedicineDenomination medicineDenomination) {
+        this.medicineDenomination = medicineDenomination;
+    }
+    
 }

@@ -30,13 +30,27 @@ const addMedicineCloseBtn = document.getElementById("addMedicineCloseBtn");
 const addMedicineDiv = document.querySelector(".addMedicineDiv");
 const addDenominationDiv = document.querySelector(".addDenominationDiv");
 
-addMedicineForm.addEventListener("submit", async (e) => {
-  console.log("Medicine added successfully");
-  addMedicineDiv.style.display = "none";
-  addMedicineSubmitBtn.style.display = "none";
-  addMedicineCloseBtn.style.display = "none";
-  addDenominationDiv.style.display = "block";
-  addMedicineFormatBtn.style.display = "block";
+addMedicineSubmitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const formData = new FormData(addMedicineForm);
+    
+    const urlSearchParams = new URLSearchParams(formData).toString();
+
+    fetch("addMedicine.do", {
+        method: "POST",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: urlSearchParams 
+    })
+    .then((res) =>  res.text())
+    .then((data) => {
+        console.log(data);
+        addMedicineDiv.style.display = "none";
+        addMedicineCloseBtn.style.display = "none"
+        addMedicineSubmitBtn.style.display = "none";
+        addDenominationDiv.style.display = "block";
+        addMedicineFormatBtn.style.display = "block"; 
+    })
+   
 });
 
 generateInputForDenominationBtn.addEventListener("click", (e) => {

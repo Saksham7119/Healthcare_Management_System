@@ -1,5 +1,12 @@
 package models;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import utils.DBManager;
+
 public class Patient {
 
     private Integer patientId;
@@ -18,6 +25,27 @@ public class Patient {
 
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
+    }
+
+    public static Patient getByUserId(int userId) {
+        Patient m = null;
+        try {
+            Connection con = DBManager.getConnection();
+
+            String query = "SELECT * FROM patients WHERE user_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                m = new Patient();
+                m.setPatientId((rs.getInt("patient_id")));
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return m;
     }
 
     public String getBp() {

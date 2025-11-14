@@ -16,16 +16,17 @@ public class MedicineDenominationImage {
     private MedicineDenomination medicineDenomiation;
     private String image;
 
-    public MedicineDenominationImage() {}
-    
-
+    public MedicineDenominationImage() {
+    }
 
     public MedicineDenominationImage(Integer medicineDenominationImageId, String image) {
         this.medicineDenominationImageId = medicineDenominationImageId;
         this.image = image;
     }
 
-
+    public MedicineDenominationImage(String image) {
+        this.image = image;
+    }
 
     public Integer getMedicineDenominationImageId() {
         return medicineDenominationImageId;
@@ -49,39 +50,60 @@ public class MedicineDenominationImage {
             ps.executeUpdate();
 
             con.close();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public Map<Integer, String> collectImagePaths(List<Integer> denominationIds){
+    public Map<Integer, String> collectImagePaths(List<Integer> denominationIds) {
         Map<Integer, String> imageMap = new HashMap<>();
 
-        try{
+        try {
             Connection con = DBManager.getConnection();
 
             String query = "SELECT image FROM medicine_denomination_images WHERE medicine_denomination_id = ?";
-            PreparedStatement ps = con.prepareStatement(query); 
+            PreparedStatement ps = con.prepareStatement(query);
 
             for (int denominationId : denominationIds) {
-                ps.setInt(1, denominationId); 
+                ps.setInt(1, denominationId);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     imageMap.put(
-                        denominationId, 
-                        rs.getString("image")
-                    );
+                            denominationId,
+                            rs.getString("image"));
                 }
-            } 
+            }
             ps.close();
-             con.close();
+            con.close();
 
-        }
-         catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return imageMap;
+    }
+
+    public MedicineDenominationImage getDenominationImageByDenominationId(int medicineDenominationId) {
+        MedicineDenominationImage mdImage = null;
+
+        try {
+            Connection con = DBManager.getConnection();
+
+            String query = "SELECT image FROM medicine_denomination_images WHERE medicine_denomination_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, medicineDenominationId);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                mdImage = new MedicineDenominationImage(rs.getString("image"));
+            }
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mdImage;
     }
 
     public String getImage() {
@@ -99,4 +121,5 @@ public class MedicineDenominationImage {
     public void setMedicineDenomiation(MedicineDenomination medicineDenomiation) {
         this.medicineDenomiation = medicineDenomiation;
     }
+
 }

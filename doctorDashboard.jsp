@@ -40,7 +40,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="#">Configure Profile</a>
+                  <a class="dropdown-item" href="ConfigureDoctorProfile.do">Configure Profile</a>
                 </li>
                 <li>
                   <a class="dropdown-item">Logout</a>
