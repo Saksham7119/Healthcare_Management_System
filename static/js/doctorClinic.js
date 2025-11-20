@@ -15,48 +15,172 @@ window.addEventListener("DOMContentLoaded", function () {
   let currentDenominationId = null;
   let denominationImageMap = {};
 
-  fetch("showClinics.do", { method: "POST" })
+  // fetch("showClinics.do", { method: "POST" })
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     let clinics = data.clinics;
+  //     const clinicDays = data.clinicDays;
+  //     const clinicImages = data.clinicImages;
+
+  //     console.log("CLINICS --", clinics);
+  //     console.log("CLINICDAYS --", clinicDays);
+  //     console.log("CLINICIMAGES --", clinicImages);
+
+  //     clinics = clinics.map((clinic) => {
+  //       const relatedDays = clinicDays.filter(
+  //         (d) => d.clinic.clinicId === clinic.clinicId
+  //       );
+  //       const relatedImages = clinicImages.filter(
+  //         (img) => img.clinic && img.clinic.clinicId == clinic.clinicId
+  //       );
+
+  //       return {
+  //         ...clinic,
+  //         clinicDays: relatedDays,
+  //         clinicImages: relatedImages,
+  //       };
+  //     });
+
+  //     console.log("MERGED CLINICS - ", clinics);
+
+  //     let cardHTMLs = [];
+
+  //     for (let obj of clinics) {
+  //       const clinicId = obj.clinicId;
+  //       const clinicName = obj.name;
+  //       const address = obj.address;
+  //       const city = obj.location.city.name;
+  //       const contact = obj.contact;
+  //       const aboutMe = obj.aboutMe;
+  //       const firstVisitCharge = obj.firstVisitCharges;
+  //       const nextVisitCharge = obj.nextVisitCharges;
+  //       const days = obj.clinicDays.map((d) => d.day.day).join(", ");
+
+  //       const imageFileName = obj.clinicImages[0]?.image;
+  //       console.log(imageFileName);
+  //       let path = imageFileName
+  //         ? "showClinicImage.do?pic_path=" + imageFileName
+  //         : "static/media/images/dummyClinicImage.png";
+
+  //       // let path = "static/media/images/dummyClinic.png";
+
+  //       const cardHtml = `
+  //         <div class="col" data-clinic-id="${clinicId}">
+  //           <div class="clinic-card">
+  //             <!-- Image Section with Overlay -->
+  //             <div class="clinic-card-image-wrapper">
+  //               <img src="${path}" class="clinic-card-image denominationImage" alt="Clinic Image" id="image-${clinicId}">
+  //             </div>
+
+  //             <input hidden class="clinicId" value="${clinicId}">
+
+  //             <!-- Content Section -->
+  //             <div class="clinic-card-body">
+  //               <div class="clinic-header">
+  //                 <h3 class="clinic-name">${clinicName}</h3>
+  //                 <div class="clinic-status-badge">Active</div>
+  //               </div>
+
+  //               <div class="clinic-info-grid">
+  //                 <div class="info-item">
+  //                   <i class="bi bi-geo-alt-fill info-icon"></i>
+  //                   <div class="info-content">
+  //                     <span class="info-label">Address</span>
+  //                     <span class="info-value">${address} , ${city}</span>
+  //                   </div>
+  //                 </div>
+
+  //                 <div class="info-item">
+  //                   <i class="bi bi-telephone-fill info-icon"></i>
+  //                   <div class="info-content">
+  //                     <span class="info-label">Contact</span>
+  //                     <span class="info-value">${contact}</span>
+  //                   </div>
+  //                 </div>
+
+  //                 <div class="info-item">
+  //                   <i class="bi bi-calendar-day info-icon"></i>
+  //                   <div class="info-content">
+  //                     <span class="info-label">Days Clinic Will Open?</span>
+  //                     <span class="info-value">${days}</span>
+  //                   </div>
+  //                 </div>
+  //               </div>
+
+  //               <div class="clinic-about">
+  //                 <div class="about-header">
+  //                   <i class="bi bi-info-circle-fill"></i>
+  //                   <span>About Clinic</span>
+  //                 </div>
+  //                 <p class="about-text">${aboutMe}</p>
+  //               </div>
+
+  //               <div class="clinic-pricing">
+  //                 <div class="pricing-card">
+  //                   <div class="pricing-icon">
+  //                     <i class="bi bi-calendar-check"></i>
+  //                   </div>
+  //                   <div class="pricing-details">
+  //                     <span class="pricing-label">First Visit</span>
+  //                     <span class="pricing-amount">Rs ${firstVisitCharge}</span>
+  //                   </div>
+  //                 </div>
+  //                 <div class="pricing-card">
+  //                   <div class="pricing-icon">
+  //                     <i class="bi bi-arrow-repeat"></i>
+  //                   </div>
+  //                   <div class="pricing-details">
+  //                     <span class="pricing-label">Follow-up</span>
+  //                     <span class="pricing-amount">Rs ${nextVisitCharge}</span>
+  //                   </div>
+  //                 </div>
+  //               </div>
+  //             </div>
+
+  //             <!-- Action Buttons -->
+  //             <div class="clinic-card-footer">
+  //             <button class="btn-clinic-action clinicCardSetSchdBtn" data-bs-toggle="modal" data-bs-target="#setScheduleModal">
+  //               <i class="bi bi-calendar-week"></i>
+  //               <span>Edit Schedule</span>
+  //             </button>
+  //             <button class="btn-clinic-action  clinicCardViewSchdBtn ">
+  //               <i class="bi bi-calendar-week"></i>
+  //               <span>View Schedule</span>
+  //             </button>
+  //               <button class="btn-clinic-action btn-edit clinicCardEditBtn " data-bs-toggle="modal" data-bs-target="#medicineEditForm">
+  //                 <i class="bi bi-pencil-square"></i>
+  //                 <span>Edit Details</span>
+  //               </button>
+  //               <button class="btn-clinic-action btn-remove clinicCardRemoveBtn">
+  //                 <i class="bi bi-trash"></i>
+  //                 <span>Remove</span>
+  //               </button>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       `;
+  //       cardHTMLs.push(cardHtml);
+  //     }
+  //     clinicCardParentDiv.innerHTML = cardHTMLs.join("");
+  //   });
+  fetch("view_clinics.do", { method: "GET" })
     .then((res) => res.json())
-    .then((data) => {
-      let clinics = data.clinics;
-      const clinicDays = data.clinicDays;
-      const clinicImages = data.clinicImages;
-
-      console.log("CLINICS --", clinics);
-      console.log("CLINICDAYS --", clinicDays);
-      console.log("CLINICIMAGES --", clinicImages);
-
-      clinics = clinics.map((clinic) => {
-        const relatedDays = clinicDays.filter(
-          (d) => d.clinic.clinicId === clinic.clinicId
-        );
-        const relatedImages = clinicImages.filter(
-          (img) => img.clinic && img.clinic.clinicId == clinic.clinicId
-        );
-
-        return {
-          ...clinic,
-          clinicDays: relatedDays,
-          clinicImages: relatedImages,
-        };
-      });
-
-      console.log("MERGED CLINICS - ", clinics);
+    .then((clinics) => {
+      console.log(clinics)
 
       let cardHTMLs = [];
 
       for (let obj of clinics) {
         const clinicId = obj.clinicId;
-        const clinicName = obj.name;
+        const clinicName = obj.name; 
         const address = obj.address;
         const city = obj.location.city.name;
         const contact = obj.contact;
         const aboutMe = obj.aboutMe;
         const firstVisitCharge = obj.firstVisitCharges;
         const nextVisitCharge = obj.nextVisitCharges;
-        const days = obj.clinicDays.map((d) => d.day.day).join(", ");
-
-        const imageFileName = obj.clinicImages[0]?.image;
+        const days = obj.clinicDay.map(dayInfo => dayInfo.day.day).join(', ');
+        const imageFileName = obj.clinicImage?.[0]?.image;
         console.log(imageFileName);
         let path = imageFileName
           ? "showClinicImage.do?pic_path=" + imageFileName
@@ -354,6 +478,9 @@ window.addEventListener("DOMContentLoaded", function () {
         .then((data) => {
           console.log(data)
           const scheduleTBodyParent = document.querySelector(".scheduleTBodyParent")
+          const closeScheduleDiv = document.querySelector(".closeScheduleDiv")
+          const deleteScheduleBtn = document.querySelector(".deleteScheduleBtn")
+
           mainScheduleShowTable.classList.remove("noDisplay")
           
           let cardHTMLs = []
@@ -389,6 +516,8 @@ window.addEventListener("DOMContentLoaded", function () {
             cardHTMLs.push(cardHTML)
           }
           scheduleTBodyParent.innerHTML = cardHTMLs.join("")
+          closeScheduleDiv.addEventListener("click" ,()=>{mainScheduleShowTable.classList.add("noDisplay")})
+          deleteScheduleBtn.addEventListener("click" ,()=>{ alert("This feature is still under development!")})
         })
     }
 

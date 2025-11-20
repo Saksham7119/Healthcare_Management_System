@@ -50,7 +50,7 @@ public class ClinicImage {
         return flag;
     }
 
-     public ArrayList<ClinicImage> fetchAllClinicImages(int clinicId){
+     public static ArrayList<ClinicImage> fetchAllClinicImages(int clinicId){
         ArrayList<ClinicImage> arrayListClinicImage = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();

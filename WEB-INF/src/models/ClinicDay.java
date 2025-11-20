@@ -57,7 +57,7 @@ public class ClinicDay {
         return flag;
     }   
 
-    public ArrayList<ClinicDay> fetchAllClinicDays(int clinicId){
+    public static ArrayList<ClinicDay> fetchAllClinicDays(int clinicId){
         ArrayList<ClinicDay> arrayListClinicDay = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();

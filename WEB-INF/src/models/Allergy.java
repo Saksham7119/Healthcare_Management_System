@@ -6,7 +6,6 @@ public class Allergy{
     private String type;
 
     public Allergy() {}
-
     public Integer getAllergyId() {
         return allergyId;
     }

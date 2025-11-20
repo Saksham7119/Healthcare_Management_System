@@ -5,6 +5,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
+
 import models.Day;
 import models.Degree;
 import models.GenericMedicine;
@@ -16,7 +18,7 @@ import utils.DBManager;
 @WebListener
 public class AppListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent ev) {
-        ServletContext context = ev.getServletContext();
+            ServletContext context = ev.getServletContext();
 
         System.out.println("                        ");
         System.out.println("######## HMS Starting ########");
@@ -70,6 +72,12 @@ public class AppListener implements ServletContextListener {
     }
 
     public void contextDestroyed(ServletContextEvent ev) {
-
+        System.out.println("######## HMS Shutting Down ########");
+        try {
+            AbandonedConnectionCleanupThread.checkedShutdown();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("######## HMS Shut Down ########");
     }
 }

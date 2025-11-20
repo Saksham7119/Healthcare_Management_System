@@ -22,7 +22,11 @@ public class Clinic {
     private Integer nextVisitCharges;
     private Location location;
 
-    public Clinic() {}
+    private ArrayList<ClinicDay> clinicDay;
+    private ArrayList<ClinicImage> clinicImage;
+
+    public Clinic() {
+    }
 
     public Clinic(String name, String address, String contact, String aboutMe, Doctor doctor, Integer firstVisitCharges,
             Integer nextVisitCharges, Location location) {
@@ -36,7 +40,22 @@ public class Clinic {
         this.location = location;
     }
 
-    
+    public Clinic(Integer clinicId, String name, String address, String contact, String aboutMe, Doctor doctor,
+            Integer firstVisitCharges, Integer nextVisitCharges, Location location, ArrayList<ClinicDay> clinicDay,
+            ArrayList<ClinicImage> clinicImage) {
+        this.clinicId = clinicId;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.aboutMe = aboutMe;
+        this.doctor = doctor;
+        this.firstVisitCharges = firstVisitCharges;
+        this.nextVisitCharges = nextVisitCharges;
+        this.location = location;
+        this.clinicDay = clinicDay;
+        this.clinicImage = clinicImage;
+    }
+
     public Clinic(Integer clinicId, String name, String address, String contact, String aboutMe,
             Integer firstVisitCharges, Integer nextVisitCharges, Location location) {
         this.clinicId = clinicId;
@@ -66,7 +85,7 @@ public class Clinic {
             ps.setInt(8, location.getLocationId());
 
             int i = ps.executeUpdate();
-            if (i == 1){
+            if (i == 1) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     this.clinicId = rs.getInt(1);
@@ -81,12 +100,12 @@ public class Clinic {
         return flag;
     }
 
-    public Boolean removeClinic(int clinicId){
+    public Boolean removeClinic(int clinicId) {
         Boolean flag = false;
         try {
             Connection con = DBManager.getConnection();
             String query = "DELETE FROM clinics WHERE  clinic_id = ?";
-            PreparedStatement ps = con.prepareStatement(query , PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, clinicId);
 
             int i = ps.executeUpdate();
@@ -95,10 +114,9 @@ public class Clinic {
                 while (rs.next()) {
                     this.clinicId = rs.getInt(1);
                 }
-                
+
                 flag = true;
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,34 +124,32 @@ public class Clinic {
         return flag;
     }
 
-    public ArrayList<Clinic> fetchAllClinics(int doctorId){
+    public static ArrayList<Clinic> fetchAllClinics(int doctorId) {
         ArrayList<Clinic> arrayListClinic = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
             String query = "SELECT * FROM clinics where doctor_id=?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, doctorId);
-    
+
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Location location = null;
                 int locationId = rs.getInt("location_id");
                 location = new Location().getLocationById(locationId);
 
-                arrayListClinic.add(
-                    new Clinic(
-                    rs.getInt("clinic_id"),
-                    rs.getString("name"),
-                    rs.getString("address"),
-                    rs.getString("contact"),
-                    rs.getString("about_me"),
-                    rs.getInt("first_visit_charges"),
-                    rs.getInt("next_visit_charges"),
-                    location
-                    )
-                );                
+                Integer clinicId = rs.getInt("clinic_id");
+
+                Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), location);
+
+                clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                
+                arrayListClinic.add(clinicObj);
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,17 +157,48 @@ public class Clinic {
         return arrayListClinic;
     }
 
-    public Clinic getClinicyById(int clinicId){
-      Clinic clinic = new Clinic();
+    public static ArrayList<Clinic> collectAllClinicsByDoctorId(int doctorId) {
+        ArrayList<Clinic> clinics = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM clinics where doctor_id=?");
+            ps.setInt(1, doctorId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = null;
+                int locationId = rs.getInt("location_id");
+                location = new Location().getLocationById(locationId);
+
+                Integer clinicId = rs.getInt("clinic_id");
+
+                Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), location);
+
+                clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                
+                clinics.add(clinicObj);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return clinics;
+    }
+
+    public Clinic getClinicyById(int clinicId) {
+        Clinic clinic = new Clinic();
 
         try {
             Connection con = DBManager.getConnection();
             String query = "select * from clinics where clinic_id = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1 , clinicId);
+            ps.setInt(1, clinicId);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 clinic.setClinicId(rs.getInt("clinic_id"));
                 clinic.setName(rs.getString("name"));
             }
@@ -235,5 +282,21 @@ public class Clinic {
 
     public void setNextVisitCharges(Integer nextVisitCharges) {
         this.nextVisitCharges = nextVisitCharges;
+    }
+
+    public ArrayList<ClinicDay> getClinicDay() {
+        return clinicDay;
+    }
+
+    public void setClinicDay(ArrayList<ClinicDay> clinicDay) {
+        this.clinicDay = clinicDay;
+    }
+
+    public ArrayList<ClinicImage> getClinicImage() {
+        return clinicImage;
+    }
+
+    public void setClinicImage(ArrayList<ClinicImage> clinicImage) {
+        this.clinicImage = clinicImage;
     }
 }

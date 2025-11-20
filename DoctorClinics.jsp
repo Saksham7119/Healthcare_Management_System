@@ -198,10 +198,10 @@
       <!--Add Clinic Modal End-->
 
       <!---Show Schedule Start-->
-       <div class="schedule-container mainScheduleShowTable noDisplay">
+       <div class="schedule-container mainScheduleShowTable noDisplay ">
         <div class="schedule-header">
-            <h2>Clinic Schedule</h2>
-            <p>Daily Appointment Slots</p>
+            <h2 style="color:white;">Clinic Schedule</h2>
+            <p style="color: white;">Daily Appointment Slots</p>
         </div>
         
         <div class="table-wrapper">
@@ -215,14 +215,14 @@
                         <th>Patient Limit</th>
                     </tr>
                 </thead>
-                <tbody class="scheduleTBodyParent">
+                <tbody class="scheduleTBodyParent ">
                 </tbody>
             </table>
         </div>
         
         <div class="button-container">
-            <button class="delete-btn">Delete Selected</button>
-            <button class="close-btn"> Close</button>
+            <button class="delete-btn deleteScheduleBtn">Delete Selected</button>
+            <button class="close-btn closeScheduleDiv"> Close</button>
         </div>
     </div>
       <!---Show Schedule End-->
@@ -232,6 +232,6 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
       <script src="static/js/doctorClinic.js"></script>
-  </body>
+  </body> 
 
   </html>

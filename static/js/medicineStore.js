@@ -316,15 +316,14 @@ window.addEventListener("DOMContentLoaded", function () {
     const medicineCardParentDiv = document.getElementById("medicineCardParentDiv");
     const uploadEditImageBtn = document.getElementById("uploadEditImageBtn");
     const pic = document.getElementById("pic");
-    const medicineImageEditForm = document.getElementById("medicineImageEditForm"); // Use the modal ID, assuming it is the form container/modal
+    const medicineImageEditForm = document.getElementById("medicineImageEditForm");
     let currentDenominationId = null;
     let denominationImageMap = {};
 
     fetch("view_medicine.do", { method: "GET" })
         .then((res) => {
 
-            if (!res.ok) {
-                // Throw an error if status is 4xx or 5xx
+            if (!res.ok) { 
                 throw new Error(`HTTP error! Status: ${res.status}`);
             }
             return res.json();
