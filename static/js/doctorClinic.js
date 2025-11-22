@@ -181,7 +181,6 @@ window.addEventListener("DOMContentLoaded", function () {
         const nextVisitCharge = obj.nextVisitCharges;
         const days = obj.clinicDay.map(dayInfo => dayInfo.day.day).join(', ');
         const imageFileName = obj.clinicImage?.[0]?.image;
-        console.log(imageFileName);
         let path = imageFileName
           ? "showClinicImage.do?pic_path=" + imageFileName
           : "static/media/images/dummyClinicImage.png";

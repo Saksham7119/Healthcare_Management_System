@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Date;
 // import java.sql.Statement;
 
+import utils.DBManager;
+
 public class User {
 
     private Integer userId;
@@ -44,19 +46,28 @@ public class User {
         this.address = address;
         this.userType = userType;
     }
+    public User(String name, String email, String contact, Date dob, Integer gender, String address) {
+        this.name = name;
+        this.email = email;
+        this.contact = contact;
+        this.dob = dob;
+        this.gender = gender;
+        this.address = address;
+    }
     // ------------Constructors end---------------------------------
+
+   
 
     // ------------JDBC Start---------------------------------
     public boolean signupUser() {
         boolean flag = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
 
             String query = "INSERT INTO users (name , dob , gender , contact , email, address , password , user_type_id) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(query);
-            // PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            // PreparedStatement ps = con.prepareStatement(query,
+            // Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, name);
             ps.setDate(2, (java.sql.Date) dob);
@@ -65,43 +76,43 @@ public class User {
             ps.setString(5, email);
             ps.setString(6, address);
             ps.setString(7, password);
-            ps.setInt(8 , userType.getUserTypeId());
+            ps.setInt(8, userType.getUserTypeId());
 
             int i = ps.executeUpdate();
 
             if (i == 1)
                 flag = true;
 
-            // ResultSet rs =  ps.getGeneratedKeys();
+            // ResultSet rs = ps.getGeneratedKeys();
             // int userId = 0;
             // if(rs.next())
-            //     userId = rs.getInt(1);
-            
+            // userId = rs.getInt(1);
+
             // if(userType.getUserTypeId() == 1 ){
-            //     String patientQuery = "INSERT INTO patients (user_id) value (?)";
-            //     PreparedStatement psPatient = con.prepareStatement(patientQuery);
-            //     psPatient.setInt(1, userId);
-            //     psPatient.executeUpdate();
-            //     System.out.println("INSERTED USER_ID IN PATIENT TABLE" + userId);
-            // } 
+            // String patientQuery = "INSERT INTO patients (user_id) value (?)";
+            // PreparedStatement psPatient = con.prepareStatement(patientQuery);
+            // psPatient.setInt(1, userId);
+            // psPatient.executeUpdate();
+            // System.out.println("INSERTED USER_ID IN PATIENT TABLE" + userId);
+            // }
             // else if(userType.getUserTypeId() == 2){
-            //     String doctorQuery = "INSERT INTO doctors (user_id) value (?)";
-            //     PreparedStatement psDoctor = con.prepareStatement(doctorQuery);
-            //     psDoctor.setInt(1, userId);
-            //     psDoctor.executeUpdate();
-            //     System.out.println("INSERTED USER_ID IN DOCTORS TABLE" + userId);
+            // String doctorQuery = "INSERT INTO doctors (user_id) value (?)";
+            // PreparedStatement psDoctor = con.prepareStatement(doctorQuery);
+            // psDoctor.setInt(1, userId);
+            // psDoctor.executeUpdate();
+            // System.out.println("INSERTED USER_ID IN DOCTORS TABLE" + userId);
             // }
             // else if(userType.getUserTypeId() == 3){
-            //     String manufacturerQuery = "INSERT INTO manufacturers (user_id) value (?)";
-            //     PreparedStatement psManufacturer = con.prepareStatement(manufacturerQuery);
-            //     psManufacturer.setInt(1, userId);
-            //     psManufacturer.executeUpdate();
-            //     System.out.println("INSERTED USER_ID IN MANUFACTURERS TABLE" + userId);
+            // String manufacturerQuery = "INSERT INTO manufacturers (user_id) value (?)";
+            // PreparedStatement psManufacturer = con.prepareStatement(manufacturerQuery);
+            // psManufacturer.setInt(1, userId);
+            // psManufacturer.executeUpdate();
+            // System.out.println("INSERTED USER_ID IN MANUFACTURERS TABLE" + userId);
             // }
 
             con.close();
 
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return flag;
@@ -111,9 +122,7 @@ public class User {
         boolean flag = false;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
 
             String query = "select user_id, email , name , user_type_id from users where email=? and password=?";
 
@@ -123,34 +132,54 @@ public class User {
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
-            
-            // if (rs.next()) {
-            //     email = rs.getString("email");
-            //     Integer userTypeId = rs.getInt("user_type_id");
 
-            //     userType = new UserType();
-            //     userType.setUserTypeId(userTypeId);
-            //     flag = true;
+            // if (rs.next()) {
+            // email = rs.getString("email");
+            // Integer userTypeId = rs.getInt("user_type_id");
+
+            // userType = new UserType();
+            // userType.setUserTypeId(userTypeId);
+            // flag = true;
             // }
 
             if (rs.next()) {
-            this.setUserId(rs.getInt("user_id"));
-            this.setEmail(rs.getString("email"));
-            this.setName(rs.getString("name"));
+                this.setUserId(rs.getInt("user_id"));
+                this.setEmail(rs.getString("email"));
+                this.setName(rs.getString("name"));
 
-            UserType userType = new UserType();
-            userType.setUserTypeId(rs.getInt("user_type_id"));
-            this.setUserType(userType);
+                UserType userType = new UserType();
+                userType.setUserTypeId(rs.getInt("user_type_id"));
+                this.setUserType(userType);
 
-            flag = true;
-        }
+                flag = true;
+            }
 
             con.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return flag;
+    }
+
+    public User getUserInfoByUserId(int userId) {
+        User user = null;
+        try {
+            Connection con = DBManager.getConnection();
+
+            String query = "SELECT * FROM users WHERE user_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new User(rs.getString("name"), rs.getString("email"), rs.getString("contact"),
+                        rs.getDate("dob"), rs.getInt("gender"), rs.getString("address") );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     // ------------JDBC End---------------------------------

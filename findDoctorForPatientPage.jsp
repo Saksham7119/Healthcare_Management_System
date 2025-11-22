@@ -18,7 +18,7 @@
     />
     <link
       rel="stylesheet"
-      href="<c:url value='/static/css/patientHomePage.css' />"
+      href="<c:url value='/static/css/findDoctorForPatientPage.css' />"
     />
   </head>
 
@@ -73,11 +73,7 @@
                   >
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item"
-                    href="logout.do"
-                    >Logout</a
-                  >
+                  <a class="dropdown-item" href="logout.do">Logout</a>
                 </li>
               </ul>
             </li>
@@ -87,55 +83,21 @@
     </nav>
     <!--Header End-->
 
-    <div class="container-fluid px-4 py-3">
-      <!-- Welcome Section Start -->
-      <div class="welcome-section">
-        <div class="row align-items-center">
-          <div class="col-lg-8 col-md-7">
-            <h2 class="welcome-title">Welcome, ${sessionScope.userName}</h2>
-            <p class="welcome-subtitle fs-5 mb-4">
-              Empower healthcare by managing and listing high-quality medicines
-              for better patient outcomes.
-            </p>
-            <div class="action-buttons">
-              <a href="findDoctorPage.do">
-              <button
-                type="button"
-                class="btn action-btn"
-              >
-                <i class="bi bi-search-heart me-2"></i>Consult Doctors 
-              </button></a>
-              <a href="">
-                <button type="button" class="btn action-btn">
-                  <i class="bi bi-eye me-2"></i>View Prescription
-                </button></a
-              >
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-5 text-center">
-            <img
-              src="static/media/images/user.png"
-              alt="User Avatar"
-              class="user-avatar"
-            />
-          </div>
-        </div>
+    <!--In here we neeD to fix that if there are no cards then the footer moves up , we need to fix it in the bottom-->
+
+    <!-----------------Store Start----------->
+    <!-- <div class="mb-5 mx-5 mt-3">
+      <h4 class="mb-3 border-bottom pb-2">Your Store</h4>
+      <div class="container my-4 mainStoreDiv" id="mainStoreDiv">
+        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 medicineCardParentDiv" id="medicineCardParentDiv">
       </div>
-      <!--Welcome Section End-->
+    </div> -->
 
-      <!--Notification Section Start-->
-      <div class="mb-3">
-        <h4 class="mb-3 border-bottom pb-2">Notifications</h4>
-
-        <div class="notification-panel" id="notification-panel"></div>
+    <div class="store-container">
+      <div class="store-header">
+        <h4><i class="bi bi-search-heart me-2"></i>Find Your Doctor</h4>
       </div>
-
-      <!--Notification Section End-->
-
-      <!--Find Doctor Section Start-->
-      <div class="mb-3">
-        <h4 class="mb-3 border-bottom pb-2">Find Nearby Clinics</h4>
-
+      <div class="showDoctorDiv" id="showDoctorDiv">
         <div class="findDoctorPanel d-flex" id="findDoctorPanel">
           <div>
             <input
@@ -150,44 +112,13 @@
             <i class="bi bi-info-circle px-1"></i><p>Search Clinic By Clinic Name, Doctor Name, City or Department!</p>
           </div>
         </div>
-        <div class="filteredDoctorsParentDiv d-flex justify-content-between">
-          <div class="id-card">
-            <img src="static/media/images/user.png" alt="Profile Photo" />
-            <div class="id-info">
-              <h3>Clinic Name</h3>
-              <p>Dr. Name Surname</p>
-              <p>Expirience: DoctorExpirience</p>
-              <p>Email: dummyEmail@gmail.com</p>
-              <p>Fees: dummyFees</p>
-            </div>
-          </div>
-
-          <div class="id-card">
-            <img src="static/media/images/user.png" alt="Profile Photo" />
-            <div class="id-info">
-              <h3>Clinic Name</h3>
-              <p>Dr. Name Surname</p>
-              <p>Expirience: DoctorExpirience</p>
-              <p>Email: dummyEmail@gmail.com</p>
-              <p>Fees: dummyFees</p>
-            </div>
-          </div>
-
-          <div class="id-card">
-            <img src="static/media/images/user.png" alt="Profile Photo" />
-            <div class="id-info">
-              <h3>Clinic Name</h3>
-              <p>Dr. Name Surname</p>
-              <p>Expirience: DoctorExpirience</p>
-              <p>Email: dummyEmail@gmail.com</p>
-              <p>Fees: dummyFees</p>
-            </div>
-          </div>
-        </div>
+        <div class="doctorsCardParentDiv" id="doctorsCardParentDiv"></div>
       </div>
-      <!--Find Doctor Section End-->
     </div>
+    <!--Store End-->
+    <!-----------------Store End----------->
 
+    <!--------------------Footer Start--------------------------------------->
     <footer class="text-white py-4" style="background-color: green">
       <div class="container">
         <div class="row">
@@ -239,11 +170,12 @@
     </c:if>
     --%>
 
+    <!--------------------------Scripting Section Starts Here---------------------------->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
-    <script src="static/js/patientHomepage.js"></script>
+    <script src="static/js/findDoctorsForPatient.js"></script>
   </body>
 </html>

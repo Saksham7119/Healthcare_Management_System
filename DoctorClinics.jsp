@@ -44,7 +44,7 @@
                   <a class="dropdown-item" href="signup.jsp">Configure Profile</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a>
+                  <a class="dropdown-item" href="logout.do">Logout</a>
                 </li>
               </ul>
             </li>
@@ -232,6 +232,11 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
       <script src="static/js/doctorClinic.js"></script>
-  </body> 
+  
+      <select name="" id="" >View Clinic Schedules
+          
+      </select>
+    </body> 
+
 
   </html>

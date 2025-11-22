@@ -80,8 +80,7 @@
                 <li>
                   <a
                     class="dropdown-item"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    href="logout.do"
                     >Logout</a
                   >
                 </li>

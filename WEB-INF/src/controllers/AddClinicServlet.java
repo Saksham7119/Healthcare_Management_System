@@ -43,7 +43,7 @@ public class AddClinicServlet extends HttpServlet {
         String clinicImagePath = null;
 
         HttpSession session = request.getSession();
-        Doctor doctor = (Doctor) session.getAttribute("doctor");
+        // Doctor doctor = (Doctor) session.getAttribute("doctor");
         User user = (User) session.getAttribute("user");
 
         if (ServletFileUpload.isMultipartContent(request)) {
@@ -122,6 +122,8 @@ public class AddClinicServlet extends HttpServlet {
         City city = new City();
         Location location = new Location(clinicAddress, city.getCityById(clinicCity));
         location.addLocation();
+
+        Doctor doctor = Doctor.getByUserId(user.getUserId());
 
         Clinic clinic = new Clinic(clinicName, clinicAddress, contact, aboutClinic, doctor, firstVisitCharges,nextVisitCharges, location);
         Boolean clinicAdded = clinic.addClinic();

@@ -1,6 +1,4 @@
 package models;
-
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import utils.DBManager;
@@ -22,6 +20,7 @@ public class Clinic {
     private Integer nextVisitCharges;
     private Location location;
 
+    private ArrayList<Schedule> schedule;
     private ArrayList<ClinicDay> clinicDay;
     private ArrayList<ClinicImage> clinicImage;
 
@@ -68,6 +67,20 @@ public class Clinic {
         this.location = location;
     }
 
+    public Clinic(Integer clinicId, String name, String address, String contact, String aboutMe,
+            Integer firstVisitCharges, Integer nextVisitCharges, Doctor doctor, Location location) {
+        this.clinicId = clinicId;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.aboutMe = aboutMe;
+        this.firstVisitCharges = firstVisitCharges;
+        this.nextVisitCharges = nextVisitCharges;
+        this.doctor = doctor;
+        this.location = location;
+    }
+
+    // -------------------------------------------------------------------------------------------
     public boolean addClinic() {
         boolean flag = false;
         try {
@@ -146,7 +159,44 @@ public class Clinic {
 
                 clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
                 clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
-                
+
+                arrayListClinic.add(clinicObj);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListClinic;
+    }
+
+    public static ArrayList<Clinic> fetchAllClinics() {
+        ArrayList<Clinic> arrayListClinic = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinics";
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = null;
+                int locationId = rs.getInt("location_id");
+                location = new Location().getLocationById(locationId);
+
+                Doctor doctor = null;
+                int doctorId = rs.getInt("doctor_id");
+                doctor = new Doctor().getDoctorById(doctorId);
+
+                Integer clinicId = rs.getInt("clinic_id");
+
+                Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), doctor, location);
+
+                clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                clinicObj.setSchedule(Schedule.collectSchedules(clinicId));
+
                 arrayListClinic.add(clinicObj);
             }
 
@@ -178,7 +228,7 @@ public class Clinic {
 
                 clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
                 clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
-                
+
                 clinics.add(clinicObj);
             }
 
@@ -238,6 +288,14 @@ public class Clinic {
 
     public Location getLocation() {
         return location;
+    }
+
+    public ArrayList<Schedule> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(ArrayList<Schedule> schedule) {
+        this.schedule = schedule;
     }
 
     public void setLocation(Location location) {

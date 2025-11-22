@@ -78,7 +78,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item">Logout</a>
+                  <a class="dropdown-item" href="logout.do">Logout</a>
                 </li>
               </ul>
             </li>

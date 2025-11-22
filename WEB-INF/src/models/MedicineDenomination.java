@@ -182,7 +182,6 @@ public ArrayList<MedicineDenomination> collectDenominations(List<Integer> format
 
                 MedicineDenominationImage medicineDenominationImage = null;
                 medicineDenominationImage = new MedicineDenominationImage().getDenominationImageByDenominationId(rs.getInt("medicine_denomination_id"));
-                System.out.println(medicineDenominationImage);
                 medicineDenom = new MedicineDenomination(rs.getInt("medicine_denomination_id") , rs.getInt("denomination") , unit , medicineDenominationImage);
             }
 

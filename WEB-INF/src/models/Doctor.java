@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import utils.DBManager;
+
 public class Doctor {
 
     private Integer doctorId;
@@ -50,9 +52,7 @@ public class Doctor {
     public static Doctor getByUserId(int userId) {
         Doctor m = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager
-                    .getConnection("jdbc:mysql://localhost:3306/healthcaredb?user=root&password=1234");
+            Connection con = DBManager.getConnection();
 
             String query = "SELECT * FROM doctors WHERE user_id=?";
             PreparedStatement ps = con.prepareStatement(query);
@@ -66,7 +66,29 @@ public class Doctor {
                 m.setAboutMe((rs.getString("about_me")));
             }
             con.close();
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return m;
+    }
+
+    public Doctor getDoctorById(int doctorId) {
+        Doctor m = null;
+        try {
+           Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM doctors WHERE doctor_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, doctorId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User user = null;
+                user = new User().getUserInfoByUserId(rs.getInt("user_id"));
+                
+                m = new Doctor(rs.getString("practice_start_date") , rs.getString("about_me"), user);
+            }
+            con.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return m;

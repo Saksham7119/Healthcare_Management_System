@@ -351,14 +351,14 @@ window.addEventListener("DOMContentLoaded", function () {
                     const denominationId = denominationObj.medicineDenominationId;
                     const unitName = denominationObj.medicineUnit.unit;
                     const denominationValue = denominationObj.denomination;
-                    // const imageFileName = denominationObj.medicineDenominationImage.image; 
-                    // let path = imageFileName ? 'showPic.do?pic_path=' + imageFileName : 'static/media/images/dummyMedicine.jpg';
+                    const imageFileName = denominationObj.medicineDenominationImage?.image; 
+                    let path = imageFileName ? 'showPic.do?pic_path=' + imageFileName : 'static/media/images/dummyMedicine.jpg';
 
                     const cardHtml = `
             <div class="col" data-medicine-id="${medicineId}" data-denomination-id="${denominationId} border-card"> 
                 <div class="card h-100 shadow-sm border-0 rounded-4 medicineCard">
                     <div class="card-body" style="max-height: 180px; overflow-y: auto;">
-                        <img src="static/media/images/dummyMedicine.jpg" class="card-img-top p-3 denominationImage" alt="Medicine Image" style="border-radius: 20px;" id="image-${denominationId}">
+                        <img src="${path}" class="card-img-top p-3 denominationImage" alt="Medicine Image" style="border-radius: 20px;" id="image-${denominationId}">
                         
                         <input hidden class="medicineId" value="${medicineId}">
                         <input hidden class="denominationId" value="${denominationId}">
@@ -422,7 +422,6 @@ window.addEventListener("DOMContentLoaded", function () {
                 cardDiv.remove();
                 confirmingMedicineRemovalModal.hide();
                 confirmMedicineRemoveBtn.removeEventListener('click', confirmHandler);
-                // this.window.location.reload()
             };
 
             confirmMedicineRemoveBtn.addEventListener("click", confirmHandler);
@@ -485,6 +484,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         pic.closest('form').reset();
                     }
                     console.log('Pic uploaded and image source updated.');
+                    this.window.location.reload();  
                 } else {
                     alert("Image upload failed on server.");
                 }
