@@ -169,6 +169,7 @@ public class Clinic {
 
         return arrayListClinic;
     }
+ 
 
     public static ArrayList<Clinic> fetchAllClinics() {
         ArrayList<Clinic> arrayListClinic = new ArrayList<>();
@@ -188,6 +189,42 @@ public class Clinic {
                 doctor = new Doctor().getDoctorById(doctorId);
 
                 Integer clinicId = rs.getInt("clinic_id");
+
+                Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), doctor, location);
+
+                clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                clinicObj.setSchedule(Schedule.collectSchedules(clinicId));
+
+                arrayListClinic.add(clinicObj);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListClinic;
+    }
+
+    public static ArrayList<Clinic> collectClinicByClinicId(int clinicId) {
+        ArrayList<Clinic> arrayListClinic = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinics where clinic_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, clinicId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = null;
+                int locationId = rs.getInt("location_id");
+                location = new Location().getLocationById(locationId);
+
+                Doctor doctor = null;
+                int doctorId = rs.getInt("doctor_id");
+                doctor = new Doctor().getDoctorById(doctorId);
 
                 Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
                         rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
@@ -236,6 +273,40 @@ public class Clinic {
             e.printStackTrace();
         }
         return clinics;
+    }
+
+    public static Clinic collectClinicObjectByClinicId(int clinicId) {
+        Clinic clinic = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "SELECT * FROM clinics where clinic_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, clinicId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = null;
+                int locationId = rs.getInt("location_id");
+                location = new Location().getLocationById(locationId);
+
+                Doctor doctor = null;
+                int doctorId = rs.getInt("doctor_id");
+                doctor = new Doctor().getDoctorById(doctorId);
+
+                clinic = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), doctor, location);
+
+                clinic.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinic.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                clinic.setSchedule(Schedule.collectSchedules(clinicId));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return clinic;
     }
 
     public Clinic getClinicyById(int clinicId) {

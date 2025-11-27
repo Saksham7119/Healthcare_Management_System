@@ -1,12 +1,19 @@
 package models;
 
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import utils.DBManager;
+
+import java.sql.Date;
 
 public class Appointment {
 
     private Integer appointmentId;
     private Date appointmentDate;
-    private Integer scheduleId;
+    private Schedule schedule;
     private String diagnosed;
     private Patient patient;
     private Integer billAmount;
@@ -14,8 +21,77 @@ public class Appointment {
 
     public Appointment() {}
 
+
+
     public Integer getAppointmentId() {
         return appointmentId;
+    }
+    
+    public Appointment(Date appointmentDate, String diagnosed, Schedule schedule, Patient patient) {
+        this.appointmentDate = appointmentDate;
+        this.diagnosed = diagnosed;
+        this.schedule = schedule;
+        this.patient = patient;
+    }
+
+    public Appointment(Integer appointmentID , Date appointmentDate, String diagnosed, Schedule schedule, Patient patient) {
+        this.appointmentId = appointmentID;
+        this.appointmentDate = appointmentDate;
+        this.diagnosed = diagnosed;
+        this.schedule = schedule;
+        this.patient = patient;
+    }
+
+
+
+    public Boolean bookPatientAppointment(){
+        Boolean flag = false;
+        try {
+            Connection con = utils.DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO appointments (appointment_date , diagnosed, schedule_id , patient_id) VALUES (?,?,?,?)");
+            ps.setDate(1, appointmentDate);
+            ps.setString(2, diagnosed);
+            ps.setInt(3, schedule.getScheduleId());
+            ps.setInt(4, patient.getPatientId());
+            int i = ps.executeUpdate();
+
+            if(i>=1)
+                 flag = true; 
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public static ArrayList<Appointment> collectAppointmentsByPatientId(int patientId){
+        ArrayList<Appointment> arrayListAppointments = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM appointments WHERE patient_id = ?");
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Schedule scheduleInfoObj = Schedule.getScheduleInfoById(rs.getInt("schedule_id"));
+                Patient patientInfoObj = Patient.getPatientById(rs.getInt("patient_id"));
+
+                Appointment appointmentObj = new Appointment(
+                    rs.getInt("appointment_id"),
+                    rs.getDate("appointment_date"),
+                    rs.getString("diagnosed"),
+                    scheduleInfoObj,
+                    patientInfoObj
+                );
+
+                arrayListAppointments.add(appointmentObj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return arrayListAppointments;
     }
 
     public Patient getPatient() {
@@ -46,14 +122,6 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
     }
 
-    public Integer getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(Integer scheduleId) {
-        this.scheduleId = scheduleId;
-    }
-
     public String getDiagnosed() {
         return diagnosed;
     }
@@ -68,5 +136,17 @@ public class Appointment {
 
     public void setBillAmount(Integer billAmount) {
         this.billAmount = billAmount;
+    }
+
+
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebListener;
 
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 
+import models.BloodGroup;
 import models.Day;
 import models.Degree;
 import models.GenericMedicine;
@@ -69,6 +70,10 @@ public class AppListener implements ServletContextListener {
 
         System.out.println("-------Load Degrees------");
         context.setAttribute("degrees", Degree.getAllDegrees());
+
+        System.out.println("-------Load Degrees------");
+        context.setAttribute("bloodGroup", BloodGroup.collectBloodGroups());
+        System.out.println(BloodGroup.collectBloodGroups());
     }
 
     public void contextDestroyed(ServletContextEvent ev) {

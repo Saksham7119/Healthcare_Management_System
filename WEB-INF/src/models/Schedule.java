@@ -33,6 +33,15 @@ public class Schedule {
         this.patientLimit = patientLimit;
     }
 
+    public Schedule(Integer scheduleId, Time starTime , Time endTime , Integer patientLimit, Clinic clinic){
+        this.scheduleId = scheduleId;
+        this.startTime = starTime;
+        this.endTime = endTime;
+        this.patientLimit = patientLimit;
+        this.clinic = clinic;
+    }
+
+
     public Boolean setClinicSchedule(){
         Boolean flag = false;
         try {
@@ -73,6 +82,33 @@ public class Schedule {
             e.printStackTrace();
         }
         return arrayListSchedule;
+    }
+
+    public static Schedule getScheduleInfoById(Integer scheduleId){
+        Schedule schedule = null;
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM schedules WHERE schedule_id=?");
+            ps.setInt(1, scheduleId);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Clinic clinic = Clinic.collectClinicObjectByClinicId(rs.getInt("clinic_id"));
+                schedule = new Schedule(
+                    rs.getInt("schedule_id") , 
+                    rs.getTime("start_time"), 
+                    rs.getTime("end_time"), 
+                    rs.getInt("patient_limit"), 
+                    clinic
+                    );
+                    
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return schedule;
     }
 
     public Integer getScheduleId() {

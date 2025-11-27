@@ -17,7 +17,27 @@ public class Patient {
     private BloodGroup bloodGroup;
     private String history;
 
-    public Patient() {}
+    public Patient() {
+    }
+
+    public Patient(String bp, Integer weight, Integer height, String history, BloodGroup bloodGroup, User user) {
+        this.bp = bp;
+        this.weight = weight.doubleValue();
+        this.height = height;
+        this.history = history;
+        this.bloodGroup = bloodGroup;
+        this.user = user;
+    }
+
+    public Patient (Integer patientId , String bp , Integer height, Double weight , String history , BloodGroup bloodGroupObj , User user ){
+        this.patientId = patientId;
+        this.bp = bp;
+        this.height = height;
+        this.weight = weight;
+        this.history = history;
+        this.bloodGroup = bloodGroupObj;
+        this.user = user;
+    }
 
     public Integer getPatientId() {
         return patientId;
@@ -46,6 +66,60 @@ public class Patient {
             e.printStackTrace();
         }
         return m;
+    }
+
+    public Boolean addPatientDetails() {
+        Boolean flag = false;
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO patients (bp, height, weight, history, blood_group_id, user_id) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setString(1, bp);
+            ps.setInt(2, height);
+            ps.setDouble(3, weight);
+            ps.setString(4, history);
+            ps.setInt(5, bloodGroup.getBloodGroupId());
+            ps.setInt(6, user.getUserId());
+
+            int i = ps.executeUpdate();
+            if (i > 0) {
+                flag = true;
+            }
+            con.close();    
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public static Patient getPatientById(int patientId) {
+        Patient patient = null;
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM patients WHERE patient_id = ?");
+            ps.setInt(1, patientId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                BloodGroup bloodGroupObj = BloodGroup.getBloodGroupById(rs.getInt(rs.getInt("blood_group_id")));
+                User user = User.getUserInfoByUserId(rs.getInt("user_id"));
+
+                patient = new Patient(
+                    rs.getInt("patient_id" ), 
+                    rs.getString("bp") , 
+                    rs.getInt("height"),
+                    rs.getDouble("weight"),
+                    rs.getString("history"),
+                    bloodGroupObj,
+                    user
+                );
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return patient;
     }
 
     public String getBp() {

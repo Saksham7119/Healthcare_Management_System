@@ -86,7 +86,7 @@ window.addEventListener("DOMContentLoaded", () => {
             <input type="hidden" class="clinicId" value="${clinicId}">
 
             <div class="clinic-card-footer">
-                <button class="action-button btn-primary">Book Appointment</button>
+                <button class="action-button btn-primary bookAppointmentBtn" id="bookAppointmentBtn">Book Appointment</button>
 
                 <div class="clinic-schedule">
                     <select class="clinic-slot-select" id="slotSelect-${clinicId}">
@@ -184,5 +184,18 @@ window.addEventListener("DOMContentLoaded", () => {
                 cardHTMLs.push(cardHtml);
             }
             doctorsCardParentDiv.innerHTML = cardHTMLs.join("");
+
+            doctorsCardParentDiv.addEventListener("click", (e) => {
+                if(e.target.classList.contains("bookAppointmentBtn")){
+                    const clinicCard = e.target.closest(".clinic-card");
+                    const clinicId = clinicCard.querySelector(".clinicId").value;
+                    window.location.href = `bookAppointmentForPatient.do?clinicId=${clinicId}`;
+                }
+            })
+
+
+        
+
+            //---
         })
 });
