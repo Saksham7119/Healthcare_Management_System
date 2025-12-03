@@ -35,6 +35,8 @@ public class AddPatientAppointmentServlet extends HttpServlet {
         Date appointmentDate = Date.valueOf(request.getParameter("appointmentDate"));
         Integer bloodGroupId = Integer.parseInt(request.getParameter("patientBloodGroup"));
 
+        String jsonResponse = null;
+
         BloodGroup bloodGroup = new BloodGroup().getBloodGroupById(bloodGroupId);
 
         Patient patientObj = new Patient(bp, weight, height, medicalHistory, bloodGroup, user);
@@ -47,16 +49,18 @@ public class AddPatientAppointmentServlet extends HttpServlet {
                     newPatientObj);
             if (appointmentObj.bookPatientAppointment()) {
                 System.out.println("Appointment booked successfully.");
+                jsonResponse = "Apointment is booked successfully";
             } else {
                 System.out.println("Failed to book appointment.");
+                jsonResponse = "Failed to book appointment.";
             }
         }
         else {
             System.out.println("Failed to add patient details.");
+            jsonResponse = "Failed to book appointment.";
         }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String jsonResponse = "Apointment is booked successfully";
         response.getWriter().write(jsonResponse);
     }
 }

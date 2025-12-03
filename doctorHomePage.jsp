@@ -101,13 +101,21 @@
         <h5>Doctor Specialization</h5>
         <h6>Years Of Expirience</h6>
         <h6>Consultation Charge : 000</h6>
-        <button type="button" class="btn welcomeSectionBtn"><i class="bi bi-cloud-plus"></i>
+        <button type="button" class="btn welcomeSectionBtn">
+          <i class="bi bi-cloud-plus"></i>
           Add Appointment
         </button>
-        <button type="button" class="btn welcomeSectionBtn ms-3"><i class="bi bi-shop"></i><a href="MedicineMarketDoctor.do" style="color: white;text-decoration: none;">
-          Medicine Market</a>
+        <button type="button" class="btn welcomeSectionBtn ms-3">
+          <i class="bi bi-shop"></i
+          ><a
+            href="MedicineMarketDoctor.do"
+            style="color: white; text-decoration: none"
+          >
+            Medicine Market</a
+          >
         </button>
-        <button type="button" class="btn welcomeSectionBtn ms-3"><i class="bi bi-calendar-date"></i>
+        <button type="button" class="btn welcomeSectionBtn ms-3">
+          <i class="bi bi-calendar-date"></i>
           Set Schedule
         </button>
       </div>
@@ -141,165 +149,7 @@
       </div>
 
       <!-- Scrollable Appointments Section -->
-      <div class="appointments-container">
-        <!-- Appointment Card -->
-        <div class="appointment-card mb-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <img src="static/media/images/user.png" alt="patient" />
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <strong>Patient Name</strong>
-                </div>
-                <div class="col text-end">Age</div>
-              </div>
-              <div class="row">
-                <div class="col">Diagnosis</div>
-                <div class="col text-end">Gender</div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between gap-2 flex-wrap">
-            <div>
-              <button class="btn-custom">View Patient History</button>
-              <button class="btn-custom">Generate Prescription</button>
-              <button class="btn-custom">Request To Reschedule</button>
-            </div>
-            <div>
-              <span class="status-badge status-pending">Status : Pending</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Another Card -->
-        <div class="appointment-card mb-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <img src="static/media/images/user.png" alt="patient" />
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <strong>Patient Name</strong>
-                </div>
-                <div class="col text-end">Age</div>
-              </div>
-              <div class="row">
-                <div class="col">Diagnosis</div>
-                <div class="col text-end">Gender</div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between gap-2 flex-wrap">
-            <div>
-              <button class="btn-custom">View Patient History</button>
-              <button class="btn-custom">Generate Prescription</button>
-              <button class="btn-custom">Request To Reschedule</button>
-            </div>
-            <div>
-              <span class="status-badge status-attended"
-                >Status : Attended</span
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- Another Card -->
-        <div class="appointment-card mb-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <img src="static/media/images/user.png" alt="patient" />
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <strong>Patient Name</strong>
-                </div>
-                <div class="col text-end">Age</div>
-              </div>
-              <div class="row">
-                <div class="col">Diagnosis</div>
-                <div class="col text-end">Gender</div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between gap-2 flex-wrap">
-            <div>
-              <button class="btn-custom">View Patient History</button>
-              <button class="btn-custom">Generate Prescription</button>
-              <button class="btn-custom">Request To Reschedule</button>
-            </div>
-            <div>
-              <span class="status-badge status-cancelled"
-                >Status : Cancelled</span
-              >
-            </div>
-          </div>
-        </div>
-        <!-- Another Card -->
-        <div class="appointment-card mb-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <img src="static/media/images/user.png" alt="patient" />
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <strong>Patient Name</strong>
-                </div>
-                <div class="col text-end">Age</div>
-              </div>
-              <div class="row">
-                <div class="col">Diagnosis</div>
-                <div class="col text-end">Gender</div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between gap-2 flex-wrap">
-            <div>
-              <button class="btn-custom">View Patient History</button>
-              <button class="btn-custom">Generate Prescription</button>
-              <button class="btn-custom">Request To Reschedule</button>
-            </div>
-            <div>
-              <span class="status-badge status-rescheduled"
-                >Status : Rescheduled</span
-              >
-            </div>
-          </div>
-        </div>
-        <!-- Another Card -->
-        <div class="appointment-card mb-3">
-          <div class="row align-items-center">
-            <div class="col-auto">
-              <img src="static/media/images/user.png" alt="patient" />
-            </div>
-            <div class="col">
-              <div class="row">
-                <div class="col">
-                  <strong>Patient Name</strong>
-                </div>
-                <div class="col text-end">Age</div>
-              </div>
-              <div class="row">
-                <div class="col">Diagnosis</div>
-                <div class="col text-end">Gender</div>
-              </div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-between gap-2 flex-wrap">
-            <div>
-              <button class="btn-custom">View Patient History</button>
-              <button class="btn-custom">Generate Prescription</button>
-              <button class="btn-custom">Request To Reschedule</button>
-            </div>
-            <div>
-              <span class="status-badge status-pending">Status : Pending</span>
-            </div>
-          </div>
-        </div>
+      <div class="appointments-container" id="appointments-container"></div> 
       </div>
     </div>
     <!--Upcomining Appointment End-->
@@ -349,72 +199,6 @@
       </div>
     </footer>
     <!--Footer end-->
-
-    <!--------------------------Configure Doctor Modal Start---------------------------->
-
-    <!-- <div class="modal" id="configureDoctorModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fas fa-user-md"></i>
-                        Complete Your Profile
-                    </h5>
-                    <button type="button" class="btn-close" id="configureDoctorModalCloseBtn" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="configureDoctor.do" method="post" id="configureDoctorForm">
-                        <div class="form-group">
-                            <label for="practiceStartDate" class="form-label">
-                                <i class="fas fa-calendar-alt"></i>
-                                Practice Start Date?
-                            </label>
-                            <div class="input-wrapper">
-                                <input
-                                    type="date"
-                                    name="practiceStartDate"
-                                    id="practiceStartDate"
-                                    required
-                                    class="form-control"
-                                />
-                            </div>
-                            <div class="info-text">
-                                <i class="fas fa-info-circle"></i>
-                                When did you start practicing medicine?
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="aboutDoctor" class="form-label">
-                                <i class="fas fa-pen-fancy"></i>
-                                About Me!
-                            </label>
-                            <textarea
-                                name="aboutDoctor"
-                                id="aboutDoctor"
-                                class="form-control-textarea"
-                                placeholder="Share your specialization, experience, and what makes your practice unique..."
-                                maxlength="500"
-                                required  
-                            ></textarea>
-                            <div class="info-text">
-                                <i class="fas fa-info-circle"></i>
-                                Help patients get to know you better...
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn-submit">
-                                <i class="fas fa-check-circle"></i>
-                                Complete Setup
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-      </div> -->
-
     <div
       class="modal fade"
       id="configureDoctorModal"
@@ -438,7 +222,10 @@
             ></button>
           </div>
           <div class="modal-body">
-            <h5>For performing actions on this website , you need to complete your profile... Or else you will not be able to make changes!</h5>
+            <h5>
+              For performing actions on this website , you need to complete your
+              profile... Or else you will not be able to make changes!
+            </h5>
           </div>
           <div class="modal-footer">
             <button
@@ -448,7 +235,21 @@
             >
               Skip for now
             </button>
-            <button type="button" class="btn btn-primary" style="background-color: rgb(121, 73, 150);"><a href="ConfigureDoctorProfile.do" style="text-decoration: none;color: white;border:1px solid rgb(121, 73, 150);">Complete Now</a></button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="background-color: rgb(121, 73, 150)"
+            >
+              <a
+                href="ConfigureDoctorProfile.do"
+                style="
+                  text-decoration: none;
+                  color: white;
+                  border: 1px solid rgb(121, 73, 150);
+                "
+                >Complete Now</a
+              >
+            </button>
           </div>
         </div>
       </div>

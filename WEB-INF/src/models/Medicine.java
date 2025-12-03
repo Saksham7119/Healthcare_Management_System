@@ -132,7 +132,6 @@ public class Medicine {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return arrayListMedicine;
     }
     

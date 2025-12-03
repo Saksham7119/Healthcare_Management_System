@@ -16,6 +16,7 @@ public class Schedule {
     private Integer patientLimit;
     private Clinic clinic;
     private Integer clinicId;
+    private ArrayList<Appointment> appointment; 
 
     public Schedule() {}
 
@@ -31,6 +32,13 @@ public class Schedule {
         this.startTime = startTime;
         this.endTime = endTime;
         this.patientLimit = patientLimit;
+    }
+    public Schedule(Integer scheduleId, Time startTime, Time endTime, Integer patientLimit , ArrayList<Appointment> appointment) {
+        this.scheduleId = scheduleId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.patientLimit = patientLimit;
+        this.appointment = appointment;
     }
 
     public Schedule(Integer scheduleId, Time starTime , Time endTime , Integer patientLimit, Clinic clinic){
@@ -74,6 +82,36 @@ public class Schedule {
             while (rs.next()) {
                 arrayListSchedule.add(
                     new Schedule(rs.getInt("schedule_id") , rs.getTime("start_time"), rs.getTime("end_time"), rs.getInt("patient_limit"))
+                );
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return arrayListSchedule;
+    }
+
+    public static ArrayList<Schedule> collectSchedulesWithAppointments(int clinicId){
+        ArrayList<Schedule> arrayListSchedule = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM schedules WHERE clinic_id=?");
+            ps.setInt(1, clinicId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Integer scheduleId = rs.getInt("schedule_id");
+                ArrayList<Appointment> appointments = Appointment.collectAppointmentsByScheduleId(scheduleId);
+                arrayListSchedule.add(
+                    new Schedule(
+                        scheduleId, 
+                        rs.getTime("start_time"), 
+                        rs.getTime("end_time"), 
+                        rs.getInt("patient_limit"),
+                        appointments
+                        )
                 );
             }
 
@@ -159,5 +197,13 @@ public class Schedule {
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    public ArrayList<Appointment> getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(ArrayList<Appointment> appointment) {
+        this.appointment = appointment;
     }
 }

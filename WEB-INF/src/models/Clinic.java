@@ -275,6 +275,38 @@ public class Clinic {
         return clinics;
     }
 
+    public static ArrayList<Clinic> collectClinicAppointmentsByDoctorId(int doctorId) {
+        ArrayList<Clinic> clinics = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM clinics where doctor_id=?");
+            ps.setInt(1, doctorId);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = null;
+                int locationId = rs.getInt("location_id");
+                location = new Location().getLocationById(locationId);
+
+                Integer clinicId = rs.getInt("clinic_id");
+
+                Clinic clinicObj = new Clinic(clinicId, rs.getString("name"), rs.getString("address"),
+                        rs.getString("contact"), rs.getString("about_me"), rs.getInt("first_visit_charges"),
+                        rs.getInt("next_visit_charges"), location);
+
+                clinicObj.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
+                clinicObj.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
+                clinicObj.setSchedule(Schedule.collectSchedulesWithAppointments(clinicId));
+
+                clinics.add(clinicObj);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return clinics;
+    }
+
     public static Clinic collectClinicObjectByClinicId(int clinicId) {
         Clinic clinic = null;
         try {
@@ -299,7 +331,7 @@ public class Clinic {
 
                 clinic.setClinicDay(ClinicDay.fetchAllClinicDays(clinicId));
                 clinic.setClinicImage(ClinicImage.fetchAllClinicImages(clinicId));
-                clinic.setSchedule(Schedule.collectSchedules(clinicId));
+                clinic.setSchedule(Schedule.collectSchedulesWithAppointments(clinicId));
             }
 
         } catch (SQLException e) {

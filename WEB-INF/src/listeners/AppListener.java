@@ -9,10 +9,14 @@ import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 
 import models.BloodGroup;
 import models.Day;
+import models.DayFrequency;
 import models.Degree;
 import models.GenericMedicine;
+import models.Medicine;
 import models.MedicineUnit;
+import models.SpanFrequency;
 import models.Specialization;
+import models.Test;
 import utils.DBManager;
 // import utils.SMSGatewayManager;
 
@@ -71,9 +75,20 @@ public class AppListener implements ServletContextListener {
         System.out.println("-------Load Degrees------");
         context.setAttribute("degrees", Degree.getAllDegrees());
 
-        System.out.println("-------Load Degrees------");
+        System.out.println("-------Load BloodGroups------");
         context.setAttribute("bloodGroup", BloodGroup.collectBloodGroups());
-        System.out.println(BloodGroup.collectBloodGroups());
+
+        System.out.println("-------Load Span Frequencies------");
+        context.setAttribute("spanFreq", SpanFrequency.collectSpanFrequencies());
+
+        System.out.println("-------Load Day Frequencies------");
+        context.setAttribute("dayFreq", DayFrequency.collectDayFrequencies());
+
+        System.out.println("-------Load Tests------");
+        context.setAttribute("tests", Test.collectTests());
+
+        System.out.println("-------Load Medicines If Available------");
+        context.setAttribute("medicines", Medicine.collectMedicines());        
     }
 
     public void contextDestroyed(ServletContextEvent ev) {

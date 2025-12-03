@@ -288,10 +288,6 @@ window.addEventListener("DOMContentLoaded", () => {
         formData.append("appointmentDate", globalAppointmentDate);
 
         console.log("FormData:");
-        for (const [k, v] of formData.entries()) {
-          console.log(k, v);
-        }
-
         fetch("bookPatientAppointment.do", {
           method: "POST",
           body: new URLSearchParams([...formData])

@@ -42,6 +42,13 @@ public class Appointment {
         this.patient = patient;
     }
 
+    public Appointment(Integer appointmentID , Date appointmentDate, String diagnosed, Patient patient) {
+        this.appointmentId = appointmentID;
+        this.appointmentDate = appointmentDate;
+        this.diagnosed = diagnosed;
+        this.patient = patient;
+    }
+
 
 
     public Boolean bookPatientAppointment(){
@@ -82,6 +89,60 @@ public class Appointment {
                     rs.getDate("appointment_date"),
                     rs.getString("diagnosed"),
                     scheduleInfoObj,
+                    patientInfoObj
+                );
+
+                arrayListAppointments.add(appointmentObj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return arrayListAppointments;
+    }
+
+    public static Appointment collectAppointmentsByAppointmentId(int appointmentId){
+        Appointment appointment = null;
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM appointments WHERE appointment_id = ?");
+            ps.setInt(1, appointmentId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Schedule scheduleInfoObj = Schedule.getScheduleInfoById(rs.getInt("schedule_id"));
+                Patient patientInfoObj = Patient.getPatientById(rs.getInt("patient_id"));
+
+                appointment = new Appointment(
+                    rs.getInt("appointment_id"),
+                    rs.getDate("appointment_date"),
+                    rs.getString("diagnosed"),
+                    scheduleInfoObj,
+                    patientInfoObj
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return appointment;
+    }
+
+    public static ArrayList<Appointment> collectAppointmentsByScheduleId(int scheduleId){
+        ArrayList<Appointment> arrayListAppointments = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM appointments WHERE schedule_id = ?");
+            ps.setInt(1, scheduleId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Patient patientInfoObj = Patient.getPatientById(rs.getInt("patient_id"));
+
+                Appointment appointmentObj = new Appointment(
+                    rs.getInt("appointment_id"),
+                    rs.getDate("appointment_date"),
+                    rs.getString("diagnosed"),
                     patientInfoObj
                 );
 
