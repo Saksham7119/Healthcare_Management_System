@@ -164,7 +164,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
                     <div class="appointment-actions">
-                        <button class="action-button primary-action generatePrescriptionBtn">Generate Prescription</button>
+                        <button class="action-button primary-action generatePrescriptionBtn" data-clinic-id="${clinicId}" data-patient-id="${patientId}" data-appointment-id="${appointmentId}" >Generate Prescription</button>
                         <button class="action-button secondary-action">Request to Reschedule</button>
                     </div>
                 </div>
@@ -177,10 +177,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
         appointmentsContainer.addEventListener("click", (e) => {
           if (e.target.classList.contains("generatePrescriptionBtn")) {
-            const appointmentId = document.getElementById("appointmentId").value
-            const patientId = document.getElementById("patientId").value
-            const clinicId = document.getElementById("clinicId").value
-            console.log(appointmentId)
+
+            const clinicId = e.target.dataset.clinicId;
+            const patientId = e.target.dataset.patientId;
+            const appointmentId = e.target.dataset.appointmentId;
+
+            console.log({ clinicId, patientId, appointmentId });
             this.window.location.href = `doctorPrescription.do?appointmentId=${appointmentId}&patientId=${patientId}&clinicId=${clinicId}`
           }
 
