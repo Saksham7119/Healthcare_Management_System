@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded" , () => {
                         <div class="contact-info">Contact: ${doctorContact}</div>
                     </div>
                     <div class="clinic-actions">
-                        <button class="viewPrescriptionBtn">View Prescription</button>
+                        <button class="viewPrescriptionBtn" data-appointment-id=${appointmentId}>View Prescription</button>
                         <button class="cancelAppointmentBtn">Cancel Appointment</button>
                     </div>
                 </div>
@@ -112,10 +112,9 @@ window.addEventListener("DOMContentLoaded" , () => {
         appointmentsCardParentDiv.addEventListener("click",(e)=>{
 
           if(e.target.classList.contains("viewPrescriptionBtn")){
-            const appointmentCard = e.target.closest(".appointment-card")
-            if(appointmentCard){
-              alert("View Prescription Feature is still under development!")
-            }
+            const appointmentId = e.target.dataset.appointmentId;
+            console.log(appointmentId)
+            window.location.href = `showPrescriptionToPatient.do?appointmentId=${appointmentId}`
           }
 
           if(e.target.classList.contains("cancelAppointmentBtn")){

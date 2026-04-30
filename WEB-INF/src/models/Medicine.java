@@ -32,6 +32,13 @@ public class Medicine {
         this.sideEffect = sideEffect;
         this.manufacturer = manufacturer;
     }
+    public Medicine(String name, String description, Boolean veg, String sideEffect) {
+        this.name = name;
+        this.description = description;
+        this.veg = veg;
+        this.sideEffect = sideEffect;
+    }
+
     public Medicine(Integer medicineId, String name, String description, Boolean veg, String sideEffect) {
         this.medicineId = medicineId;
         this.name = name;
@@ -99,6 +106,34 @@ public class Medicine {
                         rs.getString("side_effect")
                     )
                 );
+            }
+
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return medicine;
+    }
+
+    public static Medicine collectMedicineByMedicineId(int medicineId){
+        Medicine medicine = null;
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from medicines where medicine_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1 , medicineId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                medicine = new Medicine(
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getBoolean("veg"),
+                        rs.getString("side_effect")
+                    );
+               
             }
 
             con.close();

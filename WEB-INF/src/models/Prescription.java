@@ -2,7 +2,11 @@ package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.mysql.cj.PerConnectionLRUFactory;
 
 import utils.DBManager;
 
@@ -10,12 +14,12 @@ public class Prescription {
 
     private Integer prescriptionId;
     private Appointment appointment;
-    private MedicineDenomination medicineDenomination;
     private DayFrequency dayFrequency;
     private Boolean consumptionStatus;
     private SpanFrequency spanFrequency;
     private Integer courseDuration;
     private String description;
+    private ArrayList<MedicineDenomination> medicineDenomination;
 
     //----helper
     private Integer medicineDenominationId;
@@ -26,6 +30,17 @@ public class Prescription {
         return prescriptionId;
     }
 
+    public Prescription(Integer prescriptionId,Boolean consumptionStatus , Integer courseDuration , String description , Appointment appointment ,  ArrayList<MedicineDenomination> medicineDenomination, DayFrequency dayFrequency , SpanFrequency spanFrequency) 
+    {
+        this.prescriptionId = prescriptionId;
+        this.consumptionStatus = consumptionStatus;
+        this.courseDuration = courseDuration;
+        this.description = description;
+        this.appointment = appointment;
+        this.medicineDenomination= medicineDenomination;
+        this.dayFrequency = dayFrequency;
+        this.spanFrequency = spanFrequency;
+    }
     public Prescription(Boolean consumptionStatus , Integer courseDuration , String description , Appointment appointment ,  Integer medicineDenominationId, DayFrequency dayFrequency , SpanFrequency spanFrequency) 
     {
         this.consumptionStatus = consumptionStatus;
@@ -62,6 +77,44 @@ public class Prescription {
         return flag;
     }
 
+    public static ArrayList<Prescription> collectPrescriptionByAppointmentId(Integer appointmentId){
+        ArrayList<Prescription> arrayListPrescription = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prescriptions WHERE appointment_id=?");
+            ps.setInt(1, appointmentId);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                Integer consumptionStatus = rs.getInt("consumption_status");
+                Boolean consumptionStatusBool = null;
+                if(consumptionStatus == 1) consumptionStatusBool = true;
+                else if (consumptionStatus == 0) consumptionStatusBool = false;
+
+                Appointment appointment = Appointment.collectAppointmentsByAppointmentId(appointmentId);
+                ArrayList<MedicineDenomination> medicineDenomination = MedicineDenomination.getDenominationInfoById(rs.getInt("medicine_denomination_id"));          
+                DayFrequency dayFrequency = DayFrequency.getDayFrequencyById(rs.getInt("day_frequency_id"));
+                SpanFrequency spanFrequency = SpanFrequency.getSpanFrequencyById(rs.getInt("span_frequency_id"));
+
+                     Prescription prescription = new Prescription(
+                        rs.getInt("prescription_id"),
+                        consumptionStatusBool,
+                        rs.getInt("course_duration"),
+                        rs.getString("description"),
+                        appointment,
+                        medicineDenomination,
+                        dayFrequency,
+                        spanFrequency
+                     );
+                arrayListPrescription.add(prescription);
+                
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return arrayListPrescription;
+    }
+
     public void setPrescriptionId(Integer prescriptionId) {
         this.prescriptionId = prescriptionId;
     }
@@ -94,11 +147,11 @@ public class Prescription {
         this.appointment = appointment;
     }
 
-    public MedicineDenomination getMedicineDenomination() {
+    public ArrayList<MedicineDenomination> getMedicineDenomination() {
         return medicineDenomination;
     }
 
-    public void setMedicineDenomination(MedicineDenomination medicineDenomination) {
+    public void setMedicineDenomination(ArrayList<MedicineDenomination> medicineDenomination) {
         this.medicineDenomination = medicineDenomination;
     }
 

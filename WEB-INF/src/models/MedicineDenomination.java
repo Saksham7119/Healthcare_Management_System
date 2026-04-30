@@ -19,12 +19,22 @@ public class MedicineDenomination {
     private MedicineUnit medicineUnit;
     private MedicineDenominationImage medicineDenominationImage;
 
+    private ArrayList<MedicineFormat> arrayListMedicineFormat;
+
     public MedicineDenomination() {
     }
 
     public MedicineDenomination(Integer denomination) {
         this.denomination = denomination;
     }
+
+    public MedicineDenomination(Integer medicineDenominationId, Integer denomination,MedicineUnit medicineUnit , ArrayList<MedicineFormat> arrayListMedicineFormat) {
+        this.medicineDenominationId = medicineDenominationId;
+        this.denomination = denomination;
+        this.medicineUnit = medicineUnit;
+        this.arrayListMedicineFormat = arrayListMedicineFormat;
+    }
+
     public MedicineDenomination(MedicineFormat medicineFormat, Integer denomination, MedicineUnit medicineUnit) {
         this.medicineFormat = medicineFormat;
         this.denomination = denomination;
@@ -187,10 +197,13 @@ public class MedicineDenomination {
                 unit = new MedicineUnit().getUnitNameById(rs.getInt("medicine_unit_id"));
 
                 MedicineDenominationImage medicineDenominationImage = null;
-                medicineDenominationImage = new MedicineDenominationImage()
-                        .getDenominationImageByDenominationId(rs.getInt("medicine_denomination_id"));
-                medicineDenom = new MedicineDenomination(rs.getInt("medicine_denomination_id"),
-                        rs.getInt("denomination"), unit, medicineDenominationImage);
+                medicineDenominationImage = new MedicineDenominationImage().getDenominationImageByDenominationId(rs.getInt("medicine_denomination_id")); 
+                medicineDenom = new MedicineDenomination(
+                    rs.getInt("medicine_denomination_id"),
+                        rs.getInt("denomination"),
+                        unit,
+                        medicineDenominationImage
+                    );
             }
 
             con.close();
@@ -200,6 +213,39 @@ public class MedicineDenomination {
         }
 
         return medicineDenom;
+    }
+
+    public static ArrayList<MedicineDenomination> getDenominationInfoById(int denominationId) {
+        ArrayList<MedicineDenomination> arrayListDenom = new ArrayList<>();
+
+        try {
+            Connection con = DBManager.getConnection();
+            String query = "select * from medicine_denominations where medicine_denomination_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, denominationId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                MedicineUnit unit = null;
+                unit = new MedicineUnit().getUnitNameById(rs.getInt("medicine_unit_id"));
+
+                ArrayList<MedicineFormat> format = MedicineFormat.collectAllFormatsByFormatId(rs.getInt("medicine_format_id"));
+
+                MedicineDenomination medicineDenom = new MedicineDenomination(
+                    rs.getInt("medicine_denomination_id"),
+                        rs.getInt("denomination"),
+                        unit,
+                        format
+                    );
+                    arrayListDenom.add(medicineDenom);
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return arrayListDenom;
     }
 
     public boolean SaveMedicineDenomination() {

@@ -20,6 +20,11 @@ public class MedicineFormat {
     private MedicineDenomination medicineDenomination;
 
     public MedicineFormat() {}
+    public MedicineFormat( Integer medicineFormatId , Format format ,Medicine medicine) {
+        this.medicineFormatId = medicineFormatId;
+        this.format = format;
+        this.medicine = medicine ; 
+    }
     public MedicineFormat(Medicine medicine , Format format) {
         this.medicine = medicine ; 
         this.format = format;
@@ -132,6 +137,39 @@ public static ArrayList<MedicineFormat> collectAllFormats(int medicineId){
                     fetchedMedicineId,
                     medicineDenomination
                 )
+            );
+        }
+
+        con.close();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return medicineFormat;
+}
+
+public static ArrayList<MedicineFormat> collectAllFormatsByFormatId(int formatId){
+    ArrayList<MedicineFormat> medicineFormat = new ArrayList<>();
+
+    try {
+        Connection con = DBManager.getConnection();            
+        String query = "select * from medicine_formats where medicine_format_id=?";
+        
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, formatId);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Medicine medicine = Medicine.collectMedicineByMedicineId(rs.getInt("medicine_id"));
+
+            Format format = null;
+            format = new Format().getFormatByFormatId(rs.getInt("format_id"));
+            medicineFormat.add(
+                new MedicineFormat(
+                    rs.getInt("medicine_format_id"),
+                    format,                    
+                    medicine
+                ) 
             );
         }
 
