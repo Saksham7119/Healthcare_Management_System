@@ -329,7 +329,7 @@ Edit `WEB-INF/web.xml` to update database credentials:
 </context-param>
 <context-param>
     <param-name>dbport</param-name>
-    <param-value>3306</param-value>
+    <param-value>****</param-value>
 </context-param>
 <context-param>
     <param-name>dbname</param-name>
@@ -337,11 +337,11 @@ Edit `WEB-INF/web.xml` to update database credentials:
 </context-param>
 <context-param>
     <param-name>dbuser</param-name>
-    <param-value>root</param-value>
+    <param-value>****</param-value>
 </context-param>
 <context-param>
     <param-name>dbpassword</param-name>
-    <param-value>1234</param-value>
+    <param-value>****</param-value>
 </context-param>
 ```
 
